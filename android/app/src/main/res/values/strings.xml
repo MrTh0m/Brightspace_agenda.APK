@@ -3,5 +3,9 @@
     <string name="app_name">Brightspace Agenda</string>
     <string name="title_activity_main">Brightspace Agenda</string>
     <string name="package_name">fr.thomasetsandie.emmgo.agenda</string>
-    <string name="custom_url_scheme">fr.thomasetsandie.emmgo.agenda</string>
+	<string name="custom_url_scheme">bsa</string>
+	<string name="widget_next_event_desc">Affiche le prochain événement (session ou atelier)</string>
+	<string name="widget_agenda_desc">Programme des événements du jour</string>
+	<string name="widget_devoirs_desc">Liste des devoirs à rendre par urgence</string>
+	<string name="widget_progression_desc">Avancement des devoirs par matière</string>
 </resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@drawable/widget_background">
+
+    <!-- En-tête -->
+    <TextView
+        android:id="@+id/widget_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prochain"
+        android:textSize="10sp"
+        android:textColor="#99FFFFFF"
+        android:textAllCaps="false" />
+
+    <!-- Temps restant -->
+    <TextView
+        android:id="@+id/widget_time_remaining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
+
+    <!-- Titre événement -->
+    <TextView
+        android:id="@+id/widget_event_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="4dp"
+        android:textSize="13sp"
+        android:textColor="#FFFFFF"
+        android:maxLines="2"
+        android:ellipsize="end" />
+
+    <!-- Heure + type -->
+    <TextView
+        android:id="@+id/widget_event_meta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:textColor="#99FFFFFF"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+</LinearLayout>

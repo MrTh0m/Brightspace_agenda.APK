@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@drawable/widget_background">
+
+    <!-- En-tête -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Progression"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/widget_prog_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+    <!-- Barre globale -->
+    <ProgressBar
+        android:id="@+id/widget_prog_bar_global"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="2dp"
+        android:max="100"
+        android:progress="0"
+        android:progressTint="#6C8EFF"
+        android:progressBackgroundTint="#33FFFFFF" />
+
+    <TextView
+        android:id="@+id/widget_prog_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:textColor="#99FFFFFF"
+        android:layout_marginBottom="6dp" />
+
+    <!-- Séparateur -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="4dp"
+        android:background="#33FFFFFF" />
+
+    <!-- Matière 1 -->
+    <LinearLayout android:id="@+id/widget_mat_row_1"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="vertical"
+        android:gravity="center_vertical" android:visibility="gone">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical">
+            <TextView android:id="@+id/widget_mat_name_1"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#DDDDFF"
+                android:maxLines="1" android:ellipsize="end" />
+            <TextView android:id="@+id/widget_mat_score_1"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="10sp" android:textColor="#FFFFFF" />
+        </LinearLayout>
+        <ProgressBar android:id="@+id/widget_mat_bar_1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent" android:layout_height="3dp"
+            android:max="100" android:progress="0"
+            android:progressTint="#6C8EFF" android:progressBackgroundTint="#33FFFFFF" />
+    </LinearLayout>
+
+    <!-- Matière 2 -->
+    <LinearLayout android:id="@+id/widget_mat_row_2"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="vertical"
+        android:gravity="center_vertical" android:visibility="gone">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical">
+            <TextView android:id="@+id/widget_mat_name_2"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#DDDDFF"
+                android:maxLines="1" android:ellipsize="end" />
+            <TextView android:id="@+id/widget_mat_score_2"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="10sp" android:textColor="#FFFFFF" />
+        </LinearLayout>
+        <ProgressBar android:id="@+id/widget_mat_bar_2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent" android:layout_height="3dp"
+            android:max="100" android:progress="0"
+            android:progressTint="#6C8EFF" android:progressBackgroundTint="#33FFFFFF" />
+    </LinearLayout>
+
+    <!-- Matière 3 -->
+    <LinearLayout android:id="@+id/widget_mat_row_3"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="vertical"
+        android:gravity="center_vertical" android:visibility="gone">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical">
+            <TextView android:id="@+id/widget_mat_name_3"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#DDDDFF"
+                android:maxLines="1" android:ellipsize="end" />
+            <TextView android:id="@+id/widget_mat_score_3"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="10sp" android:textColor="#FFFFFF" />
+        </LinearLayout>
+        <ProgressBar android:id="@+id/widget_mat_bar_3"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent" android:layout_height="3dp"
+            android:max="100" android:progress="0"
+            android:progressTint="#6C8EFF" android:progressBackgroundTint="#33FFFFFF" />
+    </LinearLayout>
+
+    <!-- Matière 4 -->
+    <LinearLayout android:id="@+id/widget_mat_row_4"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="vertical"
+        android:gravity="center_vertical" android:visibility="gone">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical">
+            <TextView android:id="@+id/widget_mat_name_4"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#DDDDFF"
+                android:maxLines="1" android:ellipsize="end" />
+            <TextView android:id="@+id/widget_mat_score_4"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="10sp" android:textColor="#FFFFFF" />
+        </LinearLayout>
+        <ProgressBar android:id="@+id/widget_mat_bar_4"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent" android:layout_height="3dp"
+            android:max="100" android:progress="0"
+            android:progressTint="#6C8EFF" android:progressBackgroundTint="#33FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>
