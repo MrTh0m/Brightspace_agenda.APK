@@ -23,7 +23,6 @@
             android:textStyle="bold"
             android:textColor="#FFFFFF" />
 
-        <!-- Compteurs -->
         <TextView
             android:id="@+id/widget_devoirs_pending"
             android:layout_width="wrap_content"
@@ -49,7 +48,7 @@
     </LinearLayout>
 
     <!-- Séparateur -->
-    <View
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="6dp"
@@ -61,9 +60,11 @@
         android:layout_width="match_parent" android:layout_height="0dp"
         android:layout_weight="1" android:orientation="horizontal"
         android:gravity="center_vertical" android:visibility="gone">
-        <View android:id="@+id/widget_devoir_dot_1"
-            android:layout_width="5dp" android:layout_height="5dp"
-            android:layout_marginEnd="6dp" android:background="@drawable/widget_dot" />
+        <ImageView android:id="@+id/widget_devoir_dot_1"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
         <TextView android:id="@+id/widget_devoir_title_1"
             android:layout_width="0dp" android:layout_height="wrap_content"
             android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
@@ -78,9 +79,11 @@
         android:layout_width="match_parent" android:layout_height="0dp"
         android:layout_weight="1" android:orientation="horizontal"
         android:gravity="center_vertical" android:visibility="gone">
-        <View android:id="@+id/widget_devoir_dot_2"
-            android:layout_width="5dp" android:layout_height="5dp"
-            android:layout_marginEnd="6dp" android:background="@drawable/widget_dot" />
+        <ImageView android:id="@+id/widget_devoir_dot_2"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
         <TextView android:id="@+id/widget_devoir_title_2"
             android:layout_width="0dp" android:layout_height="wrap_content"
             android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
@@ -95,9 +98,11 @@
         android:layout_width="match_parent" android:layout_height="0dp"
         android:layout_weight="1" android:orientation="horizontal"
         android:gravity="center_vertical" android:visibility="gone">
-        <View android:id="@+id/widget_devoir_dot_3"
-            android:layout_width="5dp" android:layout_height="5dp"
-            android:layout_marginEnd="6dp" android:background="@drawable/widget_dot" />
+        <ImageView android:id="@+id/widget_devoir_dot_3"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
         <TextView android:id="@+id/widget_devoir_title_3"
             android:layout_width="0dp" android:layout_height="wrap_content"
             android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
@@ -112,9 +117,11 @@
         android:layout_width="match_parent" android:layout_height="0dp"
         android:layout_weight="1" android:orientation="horizontal"
         android:gravity="center_vertical" android:visibility="gone">
-        <View android:id="@+id/widget_devoir_dot_4"
-            android:layout_width="5dp" android:layout_height="5dp"
-            android:layout_marginEnd="6dp" android:background="@drawable/widget_dot" />
+        <ImageView android:id="@+id/widget_devoir_dot_4"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
         <TextView android:id="@+id/widget_devoir_title_4"
             android:layout_width="0dp" android:layout_height="wrap_content"
             android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
@@ -129,9 +136,11 @@
         android:layout_width="match_parent" android:layout_height="0dp"
         android:layout_weight="1" android:orientation="horizontal"
         android:gravity="center_vertical" android:visibility="gone">
-        <View android:id="@+id/widget_devoir_dot_5"
-            android:layout_width="5dp" android:layout_height="5dp"
-            android:layout_marginEnd="6dp" android:background="@drawable/widget_dot" />
+        <ImageView android:id="@+id/widget_devoir_dot_5"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
         <TextView android:id="@+id/widget_devoir_title_5"
             android:layout_width="0dp" android:layout_height="wrap_content"
             android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"

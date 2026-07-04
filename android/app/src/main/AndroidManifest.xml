@@ -18,12 +18,17 @@
             android:launchMode="singleTask"
             android:exported="true">
 
-            <intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="@string/custom_url_scheme" />
-			</intent-filter>
+		<intent-filter>
+			<action android:name="android.intent.action.MAIN" />
+			<category android:name="android.intent.category.LAUNCHER" />
+		</intent-filter>
+
+		<intent-filter>
+			<action android:name="android.intent.action.VIEW" />
+			<category android:name="android.intent.category.DEFAULT" />
+			<category android:name="android.intent.category.BROWSABLE" />
+			<data android:scheme="@string/custom_url_scheme" />
+		</intent-filter>
 
         </activity>
 
@@ -87,6 +92,45 @@
 			<meta-data
 				android:name="android.appwidget.provider"
 				android:resource="@xml/widget_progression_info" />
+		</receiver>
+
+		<!-- Widget : Vue semaine fixe -->
+		<receiver
+			android:name=".WeekFixedWidget"
+			android:exported="true"
+			android:label="Semaine fixe">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/widget_week_fixed_info" />
+		</receiver>
+
+		<!-- Widget : 7 jours glissants -->
+		<receiver
+			android:name=".WeekSlidingWidget"
+			android:exported="true"
+			android:label="7 jours glissants">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/widget_week_sliding_info" />
+		</receiver>
+
+		<!-- Widget : Charge par semaine -->
+		<receiver
+			android:name=".ChargeWidget"
+			android:exported="true"
+			android:label="Charge par semaine">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/widget_charge_info" />
 		</receiver>
 
 		<!-- Receiver pour mise à jour depuis capacitor-widget-bridge -->

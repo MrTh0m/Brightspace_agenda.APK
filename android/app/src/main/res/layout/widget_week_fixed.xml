@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- widget_week_fixed.xml — Vue semaine fixe lundi→dimanche
+     Chaque colonne = un jour, affiche le label + nombre d'événements
+     Colonnes générées par le Kotlin via setTextViewText sur les IDs stables -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@drawable/widget_background">
+
+    <!-- En-tête : titre + numéro de semaine -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="6dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cette semaine"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
+        <TextView
+            android:id="@+id/widget_week_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#99FFFFFF" />
+    </LinearLayout>
+
+    <!-- 7 colonnes jours côte à côte -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <!-- Jour 1 — Lundi -->
+        <LinearLayout android:id="@+id/widget_day_col_1"
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:orientation="vertical"
+            android:gravity="center_horizontal" android:padding="2dp">
+            <TextView android:id="@+id/widget_day_label_1"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
+            <TextView android:id="@+id/widget_day_date_1"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
+            <TextView android:id="@+id/widget_day_count_1"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
+                android:layout_marginTop="4dp" />
+            <TextView android:id="@+id/widget_day_sub_1"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="8sp" android:textColor="#88FFFFFF" android:maxLines="2"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- Jour 2 — Mardi -->
+        <LinearLayout android:id="@+id/widget_day_col_2"
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:orientation="vertical"
+            android:gravity="center_horizontal" android:padding="2dp">
+            <TextView android:id="@+id/widget_day_label_2"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
+            <TextView android:id="@+id/widget_day_date_2"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
+            <TextView android:id="@+id/widget_day_count_2"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
+                android:layout_marginTop="4dp" />
+            <TextView android:id="@+id/widget_day_sub_2"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="8sp" android:textColor="#88FFFFFF" android:maxLines="2"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- Jour 3 — Mercredi -->
+        <LinearLayout android:id="@+id/widget_day_col_3"
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:orientation="vertical"
+            android:gravity="center_horizontal" android:padding="2dp">
+            <TextView android:id="@+id/widget_day_label_3"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
+            <TextView android:id="@+id/widget_day_date_3"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
+            <TextView android:id="@+id/widget_day_count_3"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
+                android:layout_marginTop="4dp" />
+            <TextView android:id="@+id/widget_day_sub_3"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="8sp" android:textColor="#88FFFFFF" android:maxLines="2"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- Jour 4 — Jeudi -->
+        <LinearLayout android:id="@+id/widget_day_col_4"
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:orientation="vertical"
+            android:gravity="center_horizontal" android:padding="2dp">
+            <TextView android:id="@+id/widget_day_label_4"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
+            <TextView android:id="@+id/widget_day_date_4"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
+            <TextView android:id="@+id/widget_day_count_4"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
+                android:layout_marginTop="4dp" />
+            <TextView android:id="@+id/widget_day_sub_4"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="8sp" android:textColor="#88FFFFFF" android:maxLines="2"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- Jour 5 — Vendredi -->
+        <LinearLayout android:id="@+id/widget_day_col_5"
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:orientation="vertical"
+            android:gravity="center_horizontal" android:padding="2dp">
+            <TextView android:id="@+id/widget_day_label_5"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
+            <TextView android:id="@+id/widget_day_date_5"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
+            <TextView android:id="@+id/widget_day_count_5"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
+                android:layout_marginTop="4dp" />
+            <TextView android:id="@+id/widget_day_sub_5"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="8sp" android:textColor="#88FFFFFF" android:maxLines="2"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- Jour 6 — Samedi -->
+        <LinearLayout android:id="@+id/widget_day_col_6"
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:orientation="vertical"
+            android:gravity="center_horizontal" android:padding="2dp">
+            <TextView android:id="@+id/widget_day_label_6"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
+            <TextView android:id="@+id/widget_day_date_6"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
+            <TextView android:id="@+id/widget_day_count_6"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
+                android:layout_marginTop="4dp" />
+            <TextView android:id="@+id/widget_day_sub_6"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="8sp" android:textColor="#88FFFFFF" android:maxLines="2"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- Jour 7 — Dimanche -->
+        <LinearLayout android:id="@+id/widget_day_col_7"
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:orientation="vertical"
+            android:gravity="center_horizontal" android:padding="2dp">
+            <TextView android:id="@+id/widget_day_label_7"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
+            <TextView android:id="@+id/widget_day_date_7"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
+            <TextView android:id="@+id/widget_day_count_7"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
+                android:layout_marginTop="4dp" />
+            <TextView android:id="@+id/widget_day_sub_7"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="8sp" android:textColor="#88FFFFFF" android:maxLines="2"
+                android:gravity="center" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

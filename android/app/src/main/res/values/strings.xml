@@ -8,4 +8,7 @@
 	<string name="widget_agenda_desc">Programme des événements du jour</string>
 	<string name="widget_devoirs_desc">Liste des devoirs à rendre par urgence</string>
 	<string name="widget_progression_desc">Avancement des devoirs par matière</string>
+	<string name="widget_week_fixed_desc">Vue semaine fixe lundi-&gt;dimanche</string>
+	<string name="widget_week_sliding_desc">Vue 7 jours glissants depuis aujourd\'hui</string>
+	<string name="widget_charge_desc">Charge de devoirs par semaine</string>
 </resources>

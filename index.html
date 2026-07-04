@@ -830,6 +830,132 @@ textarea { height:auto;padding:10px 12px;resize:vertical;line-height:1.5; }
     </div>
   </div>
 
+  <!-- Modale Notifications -->
+  <div id="notif-modal" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal-overlay" onclick="if(event.target===this)closeNotifModal()">
+      <div class="modal-box" style="max-width:380px;max-height:85vh;overflow-y:auto" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeNotifModal()"><i class="ti ti-x"></i></button>
+        <h3><i class="ti ti-bell" style="color:var(--c-blue)"></i> Notifications</h3>
+        <div class="msub">Réglages propres à cet appareil/navigateur (stockés localement).</div>
+
+        <div class="notif-section" id="notif-section" style="border-top:none;margin-top:14px;padding-top:0">
+          <div class="notif-row">
+            <div class="notif-row-label">
+              <strong>Activer les notifications</strong>
+              <small id="notif-permission-status">Autorisation requise</small>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="notif-master" onchange="Notif.toggleMaster(this.checked)">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div id="notif-options" style="display:none">
+            <div class="notif-row">
+              <div class="notif-row-label">
+                <strong>Devoir non rendu approchant</strong>
+                <small>J−3 et J−1 avant l'échéance</small>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="notif-deadline" onchange="Notif.save()">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="notif-row">
+              <div class="notif-row-label">
+                <strong>Devoir collectif sans atelier</strong>
+                <small>Aucun atelier lié, échéance ≤ 7 jours</small>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="notif-no-atelier" onchange="Notif.save()">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="notif-row">
+              <div class="notif-row-label">
+                <strong>Programme du jour</strong>
+                <small>Live sessions et ateliers prévus aujourd'hui</small>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="notif-today" onchange="Notif.save()">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="notif-row">
+              <div class="notif-row-label">
+                <strong>Événement imminent</strong>
+                <small>15 minutes avant une session ou un atelier</small>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="notif-imminent" onchange="Notif.save()">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <button class="btn" style="margin-top:8px;font-size:11px;height:28px" onclick="Notif.test()">
+              <i class="ti ti-bell-ringing"></i> Tester une notification
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale Exporter l'agenda -->
+  <div id="export-ics-modal" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal-overlay" onclick="if(event.target===this)closeExportModal()">
+      <div class="modal-box" style="max-width:380px;max-height:85vh;overflow-y:auto" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeExportModal()"><i class="ti ti-x"></i></button>
+        <h3><i class="ti ti-calendar-share" style="color:var(--c-blue)"></i> Exporter l'agenda</h3>
+        <div class="msub">2 liens à ajouter comme calendrier par abonnement (Google/Outlook/Apple). Ils se mettent à jour automatiquement (ajouts, suppressions, modifications).</div>
+
+        <div style="margin:14px 0">
+          <p style="font-size:12px;font-weight:600;margin-bottom:6px">
+            Lien abonnement privé <span style="font-weight:400;color:var(--text3)">(tout, y compris liens Teams — usage perso)</span>
+          </p>
+          <div id="export-full-section" style="display:none">
+            <div class="share-box" id="export-full-url-box"></div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn" style="font-size:11px;height:28px" onclick="Auth.copyExportUrl('full')"><i class="ti ti-copy"></i> Copier</button>
+              <button class="btn" style="font-size:11px;height:28px" onclick="Auth.regenExportToken('full')"><i class="ti ti-refresh"></i> Nouveau lien</button>
+              <button class="btn" style="font-size:11px;height:28px" onclick="Auth.disableExportToken('full')"><i class="ti ti-link-off"></i> Désactiver</button>
+            </div>
+          </div>
+          <div id="export-full-disabled-section" style="display:none">
+            <button class="btn" style="font-size:11px;height:28px" onclick="Auth.regenExportToken('full')"><i class="ti ti-share"></i> Activer</button>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid var(--border);padding-top:14px">
+          <p style="font-size:12px;font-weight:600;margin-bottom:6px">
+            Lien abonnement public <span style="font-weight:400;color:var(--text3)">(sans aucun lien — pour tes proches)</span>
+          </p>
+          <p style="font-size:11px;color:var(--text3);margin:0 0 8px">Visible dans ce lien :</p>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+            <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);cursor:pointer">
+              <input type="checkbox" id="export-public-devoirs" onchange="Auth.saveExportPrefs()"> Devoirs
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);cursor:pointer">
+              <input type="checkbox" id="export-public-sessions" onchange="Auth.saveExportPrefs()"> Live sessions
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);cursor:pointer">
+              <input type="checkbox" id="export-public-ateliers" onchange="Auth.saveExportPrefs()"> Ateliers / groupe
+            </label>
+          </div>
+          <div id="export-safe-section" style="display:none">
+            <div class="share-box" id="export-safe-url-box"></div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn" style="font-size:11px;height:28px" onclick="Auth.copyExportUrl('safe')"><i class="ti ti-copy"></i> Copier</button>
+              <button class="btn" style="font-size:11px;height:28px" onclick="Auth.regenExportToken('safe')"><i class="ti ti-refresh"></i> Nouveau lien</button>
+              <button class="btn" style="font-size:11px;height:28px" onclick="Auth.disableExportToken('safe')"><i class="ti ti-link-off"></i> Désactiver</button>
+            </div>
+          </div>
+          <div id="export-safe-disabled-section" style="display:none">
+            <button class="btn" style="font-size:11px;height:28px" onclick="Auth.regenExportToken('safe')"><i class="ti ti-share"></i> Activer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="login-modal" style="display:none" role="dialog" aria-modal="true">
     <div class="modal-overlay">
       <div class="modal-box">
@@ -993,69 +1119,31 @@ textarea { height:auto;padding:10px 12px;resize:vertical;line-height:1.5; }
         <p style="font-size:12px;color:var(--text2);margin-bottom:6px">Partage désactivé.</p>
         <button class="btn" style="font-size:11px;height:28px" onclick="Auth.regenToken()"><i class="ti ti-share"></i> Activer le partage</button>
       </div>
-    </div>
 
-    <!-- ── Notifications — toujours visible ─────────────────────── -->
-    <div class="notif-section" id="notif-section">
-      <h3><i class="ti ti-bell"></i> Notifications</h3>
-      <p style="font-size:11px;color:var(--text3);margin:-4px 0 10px">
-        Réglages propres à cet appareil/navigateur (stockés localement).
-      </p>
-      <div class="notif-row">
-        <div class="notif-row-label">
-          <strong>Activer les notifications</strong>
-          <small id="notif-permission-status">Autorisation requise</small>
-        </div>
-        <label class="switch">
-          <input type="checkbox" id="notif-master" onchange="Notif.toggleMaster(this.checked)">
-          <span class="slider"></span>
-        </label>
-      </div>
-      <div id="notif-options" style="display:none">
-        <div class="notif-row">
-          <div class="notif-row-label">
-            <strong>Devoir non rendu approchant</strong>
-            <small>J−3 et J−1 avant l'échéance</small>
-          </div>
-          <label class="switch">
-            <input type="checkbox" id="notif-deadline" onchange="Notif.save()">
-            <span class="slider"></span>
-          </label>
-        </div>
-        <div class="notif-row">
-          <div class="notif-row-label">
-            <strong>Devoir collectif sans atelier</strong>
-            <small>Aucun atelier lié, échéance ≤ 7 jours</small>
-          </div>
-          <label class="switch">
-            <input type="checkbox" id="notif-no-atelier" onchange="Notif.save()">
-            <span class="slider"></span>
-          </label>
-        </div>
-        <div class="notif-row">
-          <div class="notif-row-label">
-            <strong>Programme du jour</strong>
-            <small>Live sessions et ateliers prévus aujourd'hui</small>
-          </div>
-          <label class="switch">
-            <input type="checkbox" id="notif-today" onchange="Notif.save()">
-            <span class="slider"></span>
-          </label>
-        </div>
-        <div class="notif-row">
-          <div class="notif-row-label">
-            <strong>Événement imminent</strong>
-            <small>15 minutes avant une session ou un atelier</small>
-          </div>
-          <label class="switch">
-            <input type="checkbox" id="notif-imminent" onchange="Notif.save()">
-            <span class="slider"></span>
-          </label>
-        </div>
-        <button class="btn" style="margin-top:8px;font-size:11px;height:28px" onclick="Notif.test()">
-          <i class="ti ti-bell-ringing"></i> Tester une notification
+      <!-- ── Exporter l'agenda — bouton d'ouverture (modal) ──────────── -->
+      <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border)">
+        <h4 style="margin-bottom:4px"><i class="ti ti-calendar-share"></i> Exporter l'agenda</h4>
+        <p style="font-size:11px;color:var(--text3);margin:0 0 10px;line-height:1.5">
+          2 liens à ajouter comme calendrier par abonnement, mis à jour automatiquement.
+        </p>
+        <button class="btn" style="width:100%;justify-content:center" onclick="openExportModal()">
+          <i class="ti ti-calendar-share"></i> Exporter l'agenda
         </button>
       </div>
+    </div>
+
+    <!-- ── Notifications — bouton d'ouverture (modal) ─────────────── -->
+    <div style="border-top:1px solid var(--border);margin-top:18px;padding-top:16px">
+      <h3 style="font-size:13px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:6px">
+        <i class="ti ti-bell"></i> Notifications
+      </h3>
+      <p style="font-size:11px;color:var(--text3);margin:-2px 0 12px;line-height:1.5">
+        Réglages propres à cet appareil/navigateur (stockés localement).
+      </p>
+      <button class="btn" style="width:100%;justify-content:space-between" onclick="openNotifModal()">
+        <span><i class="ti ti-bell"></i> Gérer les notifications</span>
+        <span id="notif-status-badge" style="font-size:10px;color:var(--text3)"></span>
+      </button>
     </div>
 
     <!-- ── Sauvegarde & restauration ────────────────────────────── -->
@@ -1705,6 +1793,9 @@ const Notif = {
           t=document.getElementById('notif-today'),i=document.getElementById('notif-imminent');
     if(d)d.checked=this.settings.deadline; if(n)n.checked=this.settings.noAtelier;
     if(t)t.checked=this.settings.today;    if(i)i.checked=this.settings.imminent;
+
+    const badge = document.getElementById('notif-status-badge');
+    if (badge) badge.textContent = master.checked ? 'Activées' : 'Désactivées';
   },
 
   async toggleMaster(checked) {
@@ -2331,6 +2422,7 @@ const Auth = {
   readOnly:   false,
   shareToken: null,
   _cache:     null,      // rendu map cache for connected/share mode
+  _exportUrls: { full: '', safe: '' }, // URLs des flux ICS exportés (connecté uniquement)
   get _apiBase() {
     // Web : toujours le même serveur (chemin relatif, comportement
     // historique inchangé), SAUF quand l'utilisateur s'est connecté à un
@@ -2483,6 +2575,7 @@ const Auth = {
         pbsSyncConfig('connected', null); // PBS arrière-plan
         // Même comportement que post-login : masquer l'URL et afficher le lien de partage
         Auth._showShareInfo(cfg);
+        Auth._showExportInfo(cfg);
         if (cfg.ics_url) Auth._setIcsUrlFields(cfg.ics_url);
         // Nom personnalisé
         if (cfg.dashboard_name) {
@@ -2664,6 +2757,78 @@ const Auth = {
     }
   },
 
+  // ── Exporter l'agenda (lien abonnement privé + lien abonnement public) ──
+  _setExportTokenUI(variant, token) {
+    const enabled  = document.getElementById(`export-${variant}-section`);
+    const disabled = document.getElementById(`export-${variant}-disabled-section`);
+    const box      = document.getElementById(`export-${variant}-url-box`);
+    if (!enabled || !disabled || !box) return;
+    if (token) {
+      const base = new URL(Auth._apiBase, location.origin).href;
+      const url  = `${base}?action=export_ics&token=${token}`;
+      box.textContent = url;
+      Auth._exportUrls[variant] = url;
+      enabled.style.display  = '';
+      disabled.style.display = 'none';
+    } else {
+      Auth._exportUrls[variant] = '';
+      enabled.style.display  = 'none';
+      disabled.style.display = '';
+    }
+  },
+
+  _showExportInfo(cfg) {
+    const dv = document.getElementById('export-public-devoirs');
+    const se = document.getElementById('export-public-sessions');
+    const at = document.getElementById('export-public-ateliers');
+    if (dv) dv.checked = cfg.export_public_devoirs  !== false;
+    if (se) se.checked = cfg.export_public_sessions !== false;
+    if (at) at.checked = cfg.export_public_ateliers !== false;
+    Auth._setExportTokenUI('full', cfg.export_token_full || '');
+    Auth._setExportTokenUI('safe', cfg.export_token_safe || '');
+  },
+
+  copyExportUrl(variant) {
+    const url = Auth._exportUrls[variant];
+    if (url) navigator.clipboard.writeText(url).then(() => toast('✓ URL copiée'));
+  },
+
+  async regenExportToken(variant) {
+    const label = variant === 'full' ? 'abonnement privé' : 'abonnement public';
+    if (Auth._exportUrls[variant] && !confirm(`Générer un nouveau lien ${label} ? L'ancien sera immédiatement invalide.`)) return;
+    const r = await apiFetch(Auth._apiBase, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ action:'regen_export_token', variant }),
+    });
+    const d = await r.json();
+    if (d.ok) { Auth._setExportTokenUI(variant, d.token); toast(`✓ Nouveau lien ${label} généré`); }
+    else toast(`⚠ ${d.error || 'Erreur'}`);
+  },
+
+  async disableExportToken(variant) {
+    if (!confirm('Désactiver ce lien ? Il sera immédiatement invalide.')) return;
+    await apiFetch(Auth._apiBase, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ action:'disable_export_token', variant }),
+    });
+    Auth._setExportTokenUI(variant, '');
+    toast('Lien désactivé');
+  },
+
+  async saveExportPrefs() {
+    const body = {
+      action: 'save_export_prefs',
+      public_devoirs:  !!document.getElementById('export-public-devoirs')?.checked,
+      public_sessions: !!document.getElementById('export-public-sessions')?.checked,
+      public_ateliers: !!document.getElementById('export-public-ateliers')?.checked,
+    };
+    await apiFetch(Auth._apiBase, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(body),
+    }).catch(()=>{});
+    toast('✓ Préférence enregistrée');
+  },
+
   // ── Login modal ─────────────────────────────────────────
   showLogin() {
     document.getElementById('login-modal').style.display = '';
@@ -2693,6 +2858,7 @@ const Auth = {
         pbsSyncConfig('connected', null); // PBS : basculer vers mode connecté
         const cfg = await (await apiFetch(`${Auth._apiBase}?action=get_config`)).json();
         Auth._showShareInfo(cfg);
+        Auth._showExportInfo(cfg);
 
         // URL ICS : utiliser celle du serveur, ou sauvegarder celle du localStorage si le serveur n'en a pas
         let serverIcsUrl = d.ics_url || '';
@@ -2754,6 +2920,8 @@ const Auth = {
     Auth._updateUI();
     const sec = document.getElementById('auth-section');
     if (sec) sec.style.display = 'none';
+    Auth._setExportTokenUI('full', '');
+    Auth._setExportTokenUI('safe', '');
 
     // Afficher immédiatement l'état vidé, avant de tenter de recharger des données invité
     renderDevoirs(); renderSessions(); renderGroupTab(); renderProgression(); renderStats(); renderNotes(); updateNotesTab();
@@ -3282,6 +3450,18 @@ function openBackupModal() {
 function closeBackupModal() {
   document.getElementById('backup-modal').style.display = 'none';
   _pendingBackup = null;
+}
+function openNotifModal() {
+  document.getElementById('notif-modal').style.display = '';
+}
+function closeNotifModal() {
+  document.getElementById('notif-modal').style.display = 'none';
+}
+function openExportModal() {
+  document.getElementById('export-ics-modal').style.display = '';
+}
+function closeExportModal() {
+  document.getElementById('export-ics-modal').style.display = 'none';
 }
 function saveBackupFieldPrefs() {
   const prefs = {};
@@ -3920,6 +4100,7 @@ function buildWidgetPayload() {
   const getDays_ = d => Math.ceil((new Date(d.getFullYear(),d.getMonth(),d.getDate()) -
                                    new Date(now.getFullYear(),now.getMonth(),now.getDate())) / 86400000);
 
+  // ── Données existantes ───────────────────────────────────
   const upcomingEvents = [
     ...activeSessions().filter(s=>s._date&&s._date>now).map(s=>({
       title: s._courseName||s._title||'Session', type:'session',
@@ -3956,8 +4137,73 @@ function buildWidgetPayload() {
   const totalPending = allDevoirs.filter(d=>!effectivelyRendu(d)&&d._date).length;
   const totalAll     = allDevoirs.length;
 
+  // ── Vue semaine fixe (lun→dim de la semaine en cours) ────
+  const monday = new Date(now);
+  monday.setHours(0,0,0,0);
+  monday.setDate(now.getDate() - ((now.getDay()+6)%7)); // lundi de cette semaine
+  const DAYS_FR = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  const weekFixed = Array.from({length:7}, (_,i) => {
+    const d = new Date(monday); d.setDate(monday.getDate()+i);
+    const dayDiff = getDays_(d);
+    const sessions = activeSessions().filter(s=>s._date&&getDays_(s._date)===dayDiff)
+      .map(s=>({ time:fmtTime(s._date), title:s._courseName||s._title||'Session', type:'session',
+                 tap_url: s._teamsUrl?`bsa://teams?url=${encodeURIComponent(s._teamsUrl)}`:'bsa://tab/sessions' }));
+    const ateliers = activeGroupEvents().filter(e=>e._date&&getDays_(e._date)===dayDiff&&!detectSubgroup(e))
+      .map(e=>({ time:fmtTime(e._date), title:(getGroupTag(e._uid)?.subjectName)||e._title||'Atelier', type:'atelier', tap_url:'bsa://tab/groupe' }));
+    const devoirs = allDevoirs.filter(d=>d._date&&getDays_(d._date)===dayDiff&&!effectivelyRendu(d))
+      .map(d=>({ title:d._title, type:'devoir', tap_url:'bsa://tab/devoirs' }));
+    return {
+      label: DAYS_FR[i],
+      date: `${d.getDate()}/${d.getMonth()+1}`,
+      is_today: dayDiff === 0,
+      events: [...sessions,...ateliers,...devoirs].slice(0,3),
+      count: sessions.length + ateliers.length + devoirs.length,
+    };
+  });
+
+  // ── Vue 7 jours glissants (aujourd'hui + 6 jours) ────────
+  const weekSliding = Array.from({length:7}, (_,i) => {
+    const d = new Date(now); d.setHours(0,0,0,0); d.setDate(now.getDate()+i);
+    const dayDiff = i;
+    const dayLabel = i===0?'Auj':i===1?'Dem':DAYS_FR[(now.getDay()+i-1)%7+0] ||
+      ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'][(now.getDay()+i)%7];
+    const sessions = activeSessions().filter(s=>s._date&&getDays_(s._date)===dayDiff);
+    const ateliers = activeGroupEvents().filter(e=>e._date&&getDays_(e._date)===dayDiff&&!detectSubgroup(e));
+    const devoirs  = allDevoirs.filter(d=>d._date&&getDays_(d._date)===dayDiff&&!effectivelyRendu(d));
+    return {
+      label: dayLabel,
+      date: `${d.getDate()}/${d.getMonth()+1}`,
+      is_today: dayDiff === 0,
+      sessions: sessions.length,
+      ateliers: ateliers.length,
+      devoirs: devoirs.length,
+      count: sessions.length + ateliers.length + devoirs.length,
+      first_event: sessions.length ? fmtTime(sessions.sort((a,b)=>a._date-b._date)[0]._date) :
+                   ateliers.length ? fmtTime(ateliers.sort((a,b)=>a._date-b._date)[0]._date) : null,
+    };
+  });
+
+  // ── Charge par semaine (8 semaines, comme renderWeekChart) ─
+  const inWindow = allDevoirs.filter(d=>getDays_(d._date)>=-7&&getDays_(d._date)<=56);
+  const byWeek = {};
+  inWindow.forEach(ev => {
+    const w = isoWeek(ev._date);
+    if (!byWeek[w]) byWeek[w] = { week:w, total:0, done:0 };
+    byWeek[w].total++;
+    if (effectivelyRendu(ev)) byWeek[w].done++;
+  });
+  const chargeWeeks = Object.values(byWeek).sort((a,b)=>a.week.localeCompare(b.week)).slice(0,8);
+  const maxCharge = Math.max(...chargeWeeks.map(w=>w.total), 1);
+  const thisWeekIso = currentIsoWeek();
+  chargeWeeks.forEach(w => {
+    w.pct_total = Math.round(w.total/maxCharge*100);
+    w.pct_done  = w.total>0 ? Math.round(w.done/w.total*100) : 0;
+    w.is_current = w.week === thisWeekIso;
+    w.pending = w.total - w.done;
+  });
+
   return JSON.stringify({
-    v: 2, updated_at: now.toISOString(),
+    v: 3, updated_at: now.toISOString(),
     next_event: upcomingEvents[0] || null,
     today: todayEvents.slice(0, 5),
     devoirs: { pending:totalPending, done:totalDone,
@@ -3966,14 +4212,35 @@ function buildWidgetPayload() {
     progression: { total:totalAll, done:totalDone,
                    percent:totalAll>0?Math.round(totalDone/totalAll*100):0,
                    matieres:matieresArr.slice(0,4) },
+    week_fixed:   weekFixed,
+    week_sliding: weekSliding,
+    charge_weeks: chargeWeeks,
   });
 }
 
+// Noms des classes provider Android — doivent matcher exactement le package Kotlin
+const WIDGET_PROVIDER_CLASSES = [
+  'fr.thomasetsandie.emmgo.agenda.NextEventWidget',
+  'fr.thomasetsandie.emmgo.agenda.AgendaWidget',
+  'fr.thomasetsandie.emmgo.agenda.DevoirsWidget',
+  'fr.thomasetsandie.emmgo.agenda.ProgressionWidget',
+  'fr.thomasetsandie.emmgo.agenda.WeekFixedWidget',
+  'fr.thomasetsandie.emmgo.agenda.WeekSlidingWidget',
+  'fr.thomasetsandie.emmgo.agenda.ChargeWidget',
+];
+// Nom du fichier SharedPreferences — DOIT être identique côté Kotlin (PREFS_NAME)
+const WIDGET_PREFS_GROUP = 'bsa_widget_prefs';
+
 async function updateWidgets() {
   if (!IS_PACKAGED_APP) return;
-  const bridge = window.Capacitor?.Plugins?.CapacitorWidgetBridge;
-  if (!bridge) return;
-  try { await bridge.sendWidgetData({ data: buildWidgetPayload() }); } catch(_) {}
+  const bridge = window.Capacitor?.Plugins?.WidgetBridgePlugin;
+  if (!bridge) { console.warn('[Widgets] WidgetBridgePlugin non disponible'); return; }
+  try {
+    await bridge.setRegisteredWidgets({ widgets: WIDGET_PROVIDER_CLASSES });
+    await bridge.setItem({ key: 'bsa_widget_data', group: WIDGET_PREFS_GROUP, value: buildWidgetPayload() });
+    await bridge.reloadAllTimelines();
+    console.log('[Widgets] updateWidgets() OK');
+  } catch(e) { console.error('[Widgets] updateWidgets() échoué :', e); }
 }
 
 function processICS(txt) {

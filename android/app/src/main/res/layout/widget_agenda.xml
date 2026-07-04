@@ -33,7 +33,7 @@
     </LinearLayout>
 
     <!-- Séparateur -->
-    <View
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="6dp"
@@ -48,9 +48,11 @@
         <TextView android:id="@+id/widget_row_1_time"
             android:layout_width="36dp" android:layout_height="wrap_content"
             android:textSize="10sp" android:textColor="#99FFFFFF" />
-        <View android:id="@+id/widget_row_1_dot"
-            android:layout_width="5dp" android:layout_height="5dp"
-            android:layout_marginEnd="6dp" android:background="@drawable/widget_dot" />
+        <ImageView android:id="@+id/widget_row_1_dot"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
         <TextView android:id="@+id/widget_row_1_title"
             android:layout_width="0dp" android:layout_height="wrap_content"
             android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
@@ -65,9 +67,11 @@
         <TextView android:id="@+id/widget_row_2_time"
             android:layout_width="36dp" android:layout_height="wrap_content"
             android:textSize="10sp" android:textColor="#99FFFFFF" />
-        <View android:id="@+id/widget_row_2_dot"
-            android:layout_width="5dp" android:layout_height="5dp"
-            android:layout_marginEnd="6dp" android:background="@drawable/widget_dot" />
+        <ImageView android:id="@+id/widget_row_2_dot"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
         <TextView android:id="@+id/widget_row_2_title"
             android:layout_width="0dp" android:layout_height="wrap_content"
             android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
@@ -82,9 +86,11 @@
         <TextView android:id="@+id/widget_row_3_time"
             android:layout_width="36dp" android:layout_height="wrap_content"
             android:textSize="10sp" android:textColor="#99FFFFFF" />
-        <View android:id="@+id/widget_row_3_dot"
-            android:layout_width="5dp" android:layout_height="5dp"
-            android:layout_marginEnd="6dp" android:background="@drawable/widget_dot" />
+        <ImageView android:id="@+id/widget_row_3_dot"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
         <TextView android:id="@+id/widget_row_3_title"
             android:layout_width="0dp" android:layout_height="wrap_content"
             android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
@@ -99,9 +105,11 @@
         <TextView android:id="@+id/widget_row_4_time"
             android:layout_width="36dp" android:layout_height="wrap_content"
             android:textSize="10sp" android:textColor="#99FFFFFF" />
-        <View android:id="@+id/widget_row_4_dot"
-            android:layout_width="5dp" android:layout_height="5dp"
-            android:layout_marginEnd="6dp" android:background="@drawable/widget_dot" />
+        <ImageView android:id="@+id/widget_row_4_dot"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
         <TextView android:id="@+id/widget_row_4_title"
             android:layout_width="0dp" android:layout_height="wrap_content"
             android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
@@ -116,9 +124,11 @@
         <TextView android:id="@+id/widget_row_5_time"
             android:layout_width="36dp" android:layout_height="wrap_content"
             android:textSize="10sp" android:textColor="#99FFFFFF" />
-        <View android:id="@+id/widget_row_5_dot"
-            android:layout_width="5dp" android:layout_height="5dp"
-            android:layout_marginEnd="6dp" android:background="@drawable/widget_dot" />
+        <ImageView android:id="@+id/widget_row_5_dot"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
         <TextView android:id="@+id/widget_row_5_title"
             android:layout_width="0dp" android:layout_height="wrap_content"
             android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"

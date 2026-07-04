@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- widget_charge.xml — Charge par semaine (devoirs par semaine ISO)
+     Barres horizontales avec ProgressBar (style direct, compatible RemoteViews)
+     Barres pleines = rendus, barres hachurées = restants simulés par deux ProgressBar empilées -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@drawable/widget_background">
+
+    <!-- En-tête -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Charge par semaine"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="6dp" />
+
+    <!-- Semaine 1 -->
+    <LinearLayout android:id="@+id/widget_charge_row_1"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="horizontal"
+        android:gravity="center_vertical" android:visibility="gone">
+        <TextView android:id="@+id/widget_charge_week_1"
+            android:layout_width="50dp" android:layout_height="wrap_content"
+            android:textSize="9sp" android:textColor="#99FFFFFF" />
+        <ProgressBar android:id="@+id/widget_charge_bar_done_1"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp" android:layout_height="6dp"
+            android:layout_weight="1" android:max="100" android:progress="0"
+            android:progressTint="#52C77A" android:progressBackgroundTint="#00000000" />
+        <ProgressBar android:id="@+id/widget_charge_bar_pending_1"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp" android:layout_height="6dp"
+            android:layout_weight="1" android:max="100" android:progress="0"
+            android:progressTint="#FF6B6B" android:progressBackgroundTint="#22FFFFFF" />
+        <TextView android:id="@+id/widget_charge_count_1"
+            android:layout_width="22dp" android:layout_height="wrap_content"
+            android:textSize="9sp" android:textColor="#FFFFFF" android:gravity="end" />
+    </LinearLayout>
+
+    <!-- Semaine 2 -->
+    <LinearLayout android:id="@+id/widget_charge_row_2"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="horizontal"
+        android:gravity="center_vertical" android:visibility="gone">
+        <TextView android:id="@+id/widget_charge_week_2"
+            android:layout_width="50dp" android:layout_height="wrap_content"
+            android:textSize="9sp" android:textColor="#99FFFFFF" />
+        <ProgressBar android:id="@+id/widget_charge_bar_done_2"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp" android:layout_height="6dp"
+            android:layout_weight="1" android:max="100" android:progress="0"
+            android:progressTint="#52C77A" android:progressBackgroundTint="#00000000" />
+        <ProgressBar android:id="@+id/widget_charge_bar_pending_2"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp" android:layout_height="6dp"
+            android:layout_weight="1" android:max="100" android:progress="0"
+            android:progressTint="#FF6B6B" android:progressBackgroundTint="#22FFFFFF" />
+        <TextView android:id="@+id/widget_charge_count_2"
+            android:layout_width="22dp" android:layout_height="wrap_content"
+            android:textSize="9sp" android:textColor="#FFFFFF" android:gravity="end" />
+    </LinearLayout>
+
+    <!-- Semaine 3 -->
+    <LinearLayout android:id="@+id/widget_charge_row_3"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="horizontal"
+        android:gravity="center_vertical" android:visibility="gone">
+        <TextView android:id="@+id/widget_charge_week_3"
+            android:layout_width="50dp" android:layout_height="wrap_content"
+            android:textSize="9sp" android:textColor="#99FFFFFF" />
+        <ProgressBar android:id="@+id/widget_charge_bar_done_3"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp" android:layout_height="6dp"
+            android:layout_weight="1" android:max="100" android:progress="0"
+            android:progressTint="#52C77A" android:progressBackgroundTint="#00000000" />
+        <ProgressBar android:id="@+id/widget_charge_bar_pending_3"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp" android:layout_height="6dp"
+            android:layout_weight="1" android:max="100" android:progress="0"
+            android:progressTint="#FF6B6B" android:progressBackgroundTint="#22FFFFFF" />
+        <TextView android:id="@+id/widget_charge_count_3"
+            android:layout_width="22dp" android:layout_height="wrap_content"
+            android:textSize="9sp" android:textColor="#FFFFFF" android:gravity="end" />
+    </LinearLayout>
+
+    <!-- Semaine 4 -->
+    <LinearLayout android:id="@+id/widget_charge_row_4"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="horizontal"
+        android:gravity="center_vertical" android:visibility="gone">
+        <TextView android:id="@+id/widget_charge_week_4"
+            android:layout_width="50dp" android:layout_height="wrap_content"
+            android:textSize="9sp" android:textColor="#99FFFFFF" />
+        <ProgressBar android:id="@+id/widget_charge_bar_done_4"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp" android:layout_height="6dp"
+            android:layout_weight="1" android:max="100" android:progress="0"
+            android:progressTint="#52C77A" android:progressBackgroundTint="#00000000" />
+        <ProgressBar android:id="@+id/widget_charge_bar_pending_4"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp" android:layout_height="6dp"
+            android:layout_weight="1" android:max="100" android:progress="0"
+            android:progressTint="#FF6B6B" android:progressBackgroundTint="#22FFFFFF" />
+        <TextView android:id="@+id/widget_charge_count_4"
+            android:layout_width="22dp" android:layout_height="wrap_content"
+            android:textSize="9sp" android:textColor="#FFFFFF" android:gravity="end" />
+    </LinearLayout>
+
+    <!-- Semaine 5 -->
+    <LinearLayout android:id="@+id/widget_charge_row_5"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="horizontal"
+        android:gravity="center_vertical" android:visibility="gone">
+        <TextView android:id="@+id/widget_charge_week_5"
+            android:layout_width="50dp" android:layout_height="wrap_content"
+            android:textSize="9sp" android:textColor="#99FFFFFF" />
+        <ProgressBar android:id="@+id/widget_charge_bar_done_5"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp" android:layout_height="6dp"
+            android:layout_weight="1" android:max="100" android:progress="0"
+            android:progressTint="#52C77A" android:progressBackgroundTint="#00000000" />
+        <ProgressBar android:id="@+id/widget_charge_bar_pending_5"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp" android:layout_height="6dp"
+            android:layout_weight="1" android:max="100" android:progress="0"
+            android:progressTint="#FF6B6B" android:progressBackgroundTint="#22FFFFFF" />
+        <TextView android:id="@+id/widget_charge_count_5"
+            android:layout_width="22dp" android:layout_height="wrap_content"
+            android:textSize="9sp" android:textColor="#FFFFFF" android:gravity="end" />
+    </LinearLayout>
+
+    <!-- Légende -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp"
+        android:gravity="center">
+        <ImageView android:layout_width="8dp" android:layout_height="8dp"
+            android:background="#52C77A" android:layout_marginEnd="4dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Rendus" android:textSize="9sp" android:textColor="#88FFFFFF"
+            android:layout_marginEnd="12dp" />
+        <ImageView android:layout_width="8dp" android:layout_height="8dp"
+            android:background="#FF6B6B" android:layout_marginEnd="4dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="À rendre" android:textSize="9sp" android:textColor="#88FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>
