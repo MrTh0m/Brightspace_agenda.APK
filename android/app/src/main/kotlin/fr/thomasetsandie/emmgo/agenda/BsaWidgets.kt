@@ -162,7 +162,7 @@ class AgendaWidget : AppWidgetProvider() {
                 })
 
             // Masquer toutes les lignes + vide par défaut
-            ROW_IDS.forEach { views.setViewVisibility(it, View.GONE) }
+            for (rowId in ROW_IDS) { views.setViewVisibility(rowId, View.GONE) }
 
             val showEmpty = payload != null && count == 0
             views.setViewVisibility(R.id.widget_empty,
@@ -232,7 +232,7 @@ class DevoirsWidget : AppWidgetProvider() {
             views.setTextViewText(R.id.widget_devoirs_done,
                 if (payload == null) "Ouvre l'app" else "$done rendus")
 
-            ROW_IDS.forEach { views.setViewVisibility(it, View.GONE) }
+            for (rowId in ROW_IDS) { views.setViewVisibility(rowId, View.GONE) }
 
             val showEmpty = payload != null && pending == 0
             views.setViewVisibility(R.id.widget_devoirs_empty,
@@ -293,7 +293,7 @@ class ProgressionWidget : AppWidgetProvider() {
                 if (payload == null) "Ouvre l'app pour charger"
                 else "$done rendus sur $total devoirs")
 
-            ROW_IDS.forEach { views.setViewVisibility(it, View.GONE) }
+            for (rowId in ROW_IDS) { views.setViewVisibility(rowId, View.GONE) }
 
             for (i in 0 until minOf(mats.length(), 4)) {
                 val m     = mats.getJSONObject(i)
@@ -318,73 +318,118 @@ class ProgressionWidget : AppWidgetProvider() {
 // ══════════════════════════════════════════════════════════════════════
 // Receiver pour mise à jour depuis l'app (broadcast interne)
 // ══════════════════════════════════════════════════════════════════════
+// ── Fonction partagée pour remplir les blocs semaine (fixed et sliding) ──────
+// Les deux layouts ont les mêmes IDs — seul le titre et la source de données diffèrent
+private fun updateWeekBlocks(
+    ctx: Context,
+    views: RemoteViews,
+    days: JSONArray
+) {
+    val BLOCK_IDS  = listOf(R.id.widget_block_1, R.id.widget_block_2, R.id.widget_block_3, R.id.widget_block_4, R.id.widget_block_5)
+    val HEADER_IDS = listOf(R.id.widget_day_header_1, R.id.widget_day_header_2, R.id.widget_day_header_3, R.id.widget_day_header_4, R.id.widget_day_header_5)
+    val EV_IDS = listOf(
+        listOf(R.id.widget_ev_1_1, R.id.widget_ev_1_2, R.id.widget_ev_1_3),
+        listOf(R.id.widget_ev_2_1, R.id.widget_ev_2_2, R.id.widget_ev_2_3),
+        listOf(R.id.widget_ev_3_1, R.id.widget_ev_3_2, R.id.widget_ev_3_3),
+        listOf(R.id.widget_ev_4_1, R.id.widget_ev_4_2, R.id.widget_ev_4_3),
+        listOf(R.id.widget_ev_5_1, R.id.widget_ev_5_2, R.id.widget_ev_5_3),
+    )
+    val DOT_IDS = listOf(
+        listOf(R.id.widget_ev_dot_1_1, R.id.widget_ev_dot_1_2, R.id.widget_ev_dot_1_3),
+        listOf(R.id.widget_ev_dot_2_1, R.id.widget_ev_dot_2_2, R.id.widget_ev_dot_2_3),
+        listOf(R.id.widget_ev_dot_3_1, R.id.widget_ev_dot_3_2, R.id.widget_ev_dot_3_3),
+        listOf(R.id.widget_ev_dot_4_1, R.id.widget_ev_dot_4_2, R.id.widget_ev_dot_4_3),
+        listOf(R.id.widget_ev_dot_5_1, R.id.widget_ev_dot_5_2, R.id.widget_ev_dot_5_3),
+    )
+    val TIME_IDS = listOf(
+        listOf(R.id.widget_ev_time_1_1, R.id.widget_ev_time_1_2, R.id.widget_ev_time_1_3),
+        listOf(R.id.widget_ev_time_2_1, R.id.widget_ev_time_2_2, R.id.widget_ev_time_2_3),
+        listOf(R.id.widget_ev_time_3_1, R.id.widget_ev_time_3_2, R.id.widget_ev_time_3_3),
+        listOf(R.id.widget_ev_time_4_1, R.id.widget_ev_time_4_2, R.id.widget_ev_time_4_3),
+        listOf(R.id.widget_ev_time_5_1, R.id.widget_ev_time_5_2, R.id.widget_ev_time_5_3),
+    )
+    val TITLE_IDS = listOf(
+        listOf(R.id.widget_ev_title_1_1, R.id.widget_ev_title_1_2, R.id.widget_ev_title_1_3),
+        listOf(R.id.widget_ev_title_2_1, R.id.widget_ev_title_2_2, R.id.widget_ev_title_2_3),
+        listOf(R.id.widget_ev_title_3_1, R.id.widget_ev_title_3_2, R.id.widget_ev_title_3_3),
+        listOf(R.id.widget_ev_title_4_1, R.id.widget_ev_title_4_2, R.id.widget_ev_title_4_3),
+        listOf(R.id.widget_ev_title_5_1, R.id.widget_ev_title_5_2, R.id.widget_ev_title_5_3),
+    )
+
+    // Masquer tous les blocs par défaut
+    for (blockId in BLOCK_IDS) { views.setViewVisibility(blockId, View.GONE) }
+    views.setViewVisibility(R.id.widget_week_empty, View.GONE)
+
+    // Filtrer les jours ayant des événements et prendre les 5 premiers
+    val daysWithEvents: List<JSONObject> = (0 until days.length())
+        .map { days.getJSONObject(it) }
+        .filter { it.optInt("count", 0) > 0 }
+        .take(5)
+
+    if (daysWithEvents.isEmpty()) {
+        views.setViewVisibility(R.id.widget_week_empty, View.VISIBLE)
+        return
+    }
+
+    for (slot in daysWithEvents.indices) {
+        val day     = daysWithEvents[slot]
+        val isToday = day.optBoolean("is_today", false)
+        val label   = day.optString("label", "")
+        val date    = day.optString("date", "")
+        val events  = day.optJSONArray("events") ?: JSONArray()
+        val header  = if (isToday) "▶ $label $date" else "$label $date"
+
+        views.setViewVisibility(BLOCK_IDS[slot], View.VISIBLE)
+        views.setTextViewText(HEADER_IDS[slot], header)
+        views.setTextColor(HEADER_IDS[slot],
+            if (isToday) Color.parseColor("#FFD700") else Color.parseColor("#AAAACC"))
+        views.setOnClickPendingIntent(BLOCK_IDS[slot],
+            openAppIntent(ctx, "bsa://tab/agenda"))
+
+        // Masquer toutes les lignes événements du slot
+        for (ev_id in EV_IDS[slot]) { views.setViewVisibility(ev_id, View.GONE) }
+
+        // Remplir les événements du jour
+        for (j in 0 until minOf(events.length(), 3)) {
+            val ev    = events.getJSONObject(j)
+            val type  = ev.optString("type", "session")
+            val color = when (type) {
+                "session" -> COLOR_BLUE
+                "atelier" -> COLOR_GREEN
+                "devoir"  -> Color.parseColor("#A78BFA")
+                else      -> Color.WHITE
+            }
+            views.setViewVisibility(EV_IDS[slot][j], View.VISIBLE)
+            views.setInt(DOT_IDS[slot][j], "setColorFilter", color)
+            views.setTextViewText(TIME_IDS[slot][j], ev.optString("time", ""))
+            views.setTextViewText(TITLE_IDS[slot][j], ev.optString("title", "—"))
+        }
+    }
+}
+
 // ══════════════════════════════════════════════════════════════════════
 // Widget 5 — Semaine fixe lundi→dimanche (4×2)
 // ══════════════════════════════════════════════════════════════════════
 class WeekFixedWidget : AppWidgetProvider() {
     override fun onUpdate(ctx: Context, mgr: AppWidgetManager, ids: IntArray) {
-        ids.forEach { id ->
+        for (id in ids) {
             try { update(ctx, mgr, id) }
             catch (e: Exception) { Log.e(TAG, "WeekFixedWidget.update() failed: ${e.message}") }
         }
     }
 
     companion object {
-        private val COL_IDS   = listOf(R.id.widget_day_col_1, R.id.widget_day_col_2, R.id.widget_day_col_3,
-                                       R.id.widget_day_col_4, R.id.widget_day_col_5, R.id.widget_day_col_6,
-                                       R.id.widget_day_col_7)
-        private val LABEL_IDS = listOf(R.id.widget_day_label_1, R.id.widget_day_label_2, R.id.widget_day_label_3,
-                                       R.id.widget_day_label_4, R.id.widget_day_label_5, R.id.widget_day_label_6,
-                                       R.id.widget_day_label_7)
-        private val DATE_IDS  = listOf(R.id.widget_day_date_1, R.id.widget_day_date_2, R.id.widget_day_date_3,
-                                       R.id.widget_day_date_4, R.id.widget_day_date_5, R.id.widget_day_date_6,
-                                       R.id.widget_day_date_7)
-        private val COUNT_IDS = listOf(R.id.widget_day_count_1, R.id.widget_day_count_2, R.id.widget_day_count_3,
-                                       R.id.widget_day_count_4, R.id.widget_day_count_5, R.id.widget_day_count_6,
-                                       R.id.widget_day_count_7)
-        private val SUB_IDS   = listOf(R.id.widget_day_sub_1, R.id.widget_day_sub_2, R.id.widget_day_sub_3,
-                                       R.id.widget_day_sub_4, R.id.widget_day_sub_5, R.id.widget_day_sub_6,
-                                       R.id.widget_day_sub_7)
-
         fun update(ctx: Context, mgr: AppWidgetManager, id: Int) {
             val views   = RemoteViews(ctx.packageName, R.layout.widget_week_fixed)
             val payload = readPayload(ctx)
             val days    = payload?.optJSONArray("week_fixed") ?: JSONArray()
 
+            views.setTextViewText(R.id.widget_week_title, "Cette semaine")
             views.setTextViewText(R.id.widget_week_label,
                 if (payload == null) "Ouvre l'app" else "")
             views.setOnClickPendingIntent(R.id.widget_week_label,
                 openAppIntent(ctx, "bsa://tab/agenda"))
-
-            for (i in 0 until 7) {
-                val day = if (i < days.length()) days.getJSONObject(i) else null
-                val isToday = day?.optBoolean("is_today", false) ?: false
-                val count   = day?.optInt("count", 0) ?: 0
-                val textColor = if (isToday) Color.parseColor("#FFD700") else Color.WHITE
-                val countColor = when {
-                    count == 0 -> Color.parseColor("#44FFFFFF")
-                    count >= 3 -> Color.parseColor("#FF6B6B")
-                    else       -> Color.parseColor("#6C8EFF")
-                }
-
-                views.setTextViewText(LABEL_IDS[i], day?.optString("label", "-") ?: "-")
-                views.setTextColor(LABEL_IDS[i], if (isToday) Color.parseColor("#FFD700") else Color.parseColor("#99FFFFFF"))
-                views.setTextViewText(DATE_IDS[i], day?.optString("date", "") ?: "")
-                views.setTextColor(DATE_IDS[i], textColor)
-                views.setTextViewText(COUNT_IDS[i], if (count > 0) "$count" else "·")
-                views.setTextColor(COUNT_IDS[i], countColor)
-
-                // Afficher les titres des 2 premiers événements du jour
-                val events = day?.optJSONArray("events")
-                val subText = if (events != null && events.length() > 0) {
-                    (0 until minOf(events.length(), 2)).joinToString("\n") { j ->
-                        events.getJSONObject(j).optString("title", "").take(8)
-                    }
-                } else ""
-                views.setTextViewText(SUB_IDS[i], subText)
-                views.setOnClickPendingIntent(COL_IDS[i], openAppIntent(ctx, "bsa://tab/agenda"))
-            }
-
+            updateWeekBlocks(ctx, views, days)
             mgr.updateAppWidget(id, views)
         }
     }
@@ -395,60 +440,24 @@ class WeekFixedWidget : AppWidgetProvider() {
 // ══════════════════════════════════════════════════════════════════════
 class WeekSlidingWidget : AppWidgetProvider() {
     override fun onUpdate(ctx: Context, mgr: AppWidgetManager, ids: IntArray) {
-        ids.forEach { id ->
+        for (id in ids) {
             try { update(ctx, mgr, id) }
             catch (e: Exception) { Log.e(TAG, "WeekSlidingWidget.update() failed: ${e.message}") }
         }
     }
 
     companion object {
-        private val COL_IDS   = listOf(R.id.widget_sl_col_1, R.id.widget_sl_col_2, R.id.widget_sl_col_3,
-                                       R.id.widget_sl_col_4, R.id.widget_sl_col_5, R.id.widget_sl_col_6,
-                                       R.id.widget_sl_col_7)
-        private val LABEL_IDS = listOf(R.id.widget_sl_label_1, R.id.widget_sl_label_2, R.id.widget_sl_label_3,
-                                       R.id.widget_sl_label_4, R.id.widget_sl_label_5, R.id.widget_sl_label_6,
-                                       R.id.widget_sl_label_7)
-        private val DATE_IDS  = listOf(R.id.widget_sl_date_1, R.id.widget_sl_date_2, R.id.widget_sl_date_3,
-                                       R.id.widget_sl_date_4, R.id.widget_sl_date_5, R.id.widget_sl_date_6,
-                                       R.id.widget_sl_date_7)
-        private val COUNT_IDS = listOf(R.id.widget_sl_count_1, R.id.widget_sl_count_2, R.id.widget_sl_count_3,
-                                       R.id.widget_sl_count_4, R.id.widget_sl_count_5, R.id.widget_sl_count_6,
-                                       R.id.widget_sl_count_7)
-        private val FIRST_IDS = listOf(R.id.widget_sl_first_1, R.id.widget_sl_first_2, R.id.widget_sl_first_3,
-                                       R.id.widget_sl_first_4, R.id.widget_sl_first_5, R.id.widget_sl_first_6,
-                                       R.id.widget_sl_first_7)
-
         fun update(ctx: Context, mgr: AppWidgetManager, id: Int) {
             val views   = RemoteViews(ctx.packageName, R.layout.widget_week_sliding)
             val payload = readPayload(ctx)
             val days    = payload?.optJSONArray("week_sliding") ?: JSONArray()
 
-            views.setTextViewText(R.id.widget_sliding_label,
+            views.setTextViewText(R.id.widget_week_title, "7 prochains jours")
+            views.setTextViewText(R.id.widget_week_label,
                 if (payload == null) "Ouvre l'app" else "")
-            views.setOnClickPendingIntent(R.id.widget_sliding_label,
+            views.setOnClickPendingIntent(R.id.widget_week_label,
                 openAppIntent(ctx, "bsa://tab/agenda"))
-
-            for (i in 0 until 7) {
-                val day     = if (i < days.length()) days.getJSONObject(i) else null
-                val isToday = day?.optBoolean("is_today", false) ?: false
-                val count   = day?.optInt("count", 0) ?: 0
-                val first   = day?.optString("first_event") ?: ""
-                val countColor = when {
-                    count == 0 -> Color.parseColor("#44FFFFFF")
-                    count >= 3 -> Color.parseColor("#FF6B6B")
-                    else       -> Color.parseColor("#6C8EFF")
-                }
-
-                views.setTextViewText(LABEL_IDS[i], day?.optString("label", "-") ?: "-")
-                views.setTextColor(LABEL_IDS[i], if (isToday) Color.parseColor("#FFD700") else Color.parseColor("#99FFFFFF"))
-                views.setTextViewText(DATE_IDS[i], day?.optString("date", "") ?: "")
-                views.setTextColor(DATE_IDS[i], if (isToday) Color.parseColor("#FFD700") else Color.WHITE)
-                views.setTextViewText(COUNT_IDS[i], if (count > 0) "$count" else "·")
-                views.setTextColor(COUNT_IDS[i], countColor)
-                views.setTextViewText(FIRST_IDS[i], first)
-                views.setOnClickPendingIntent(COL_IDS[i], openAppIntent(ctx, "bsa://tab/agenda"))
-            }
-
+            updateWeekBlocks(ctx, views, days)
             mgr.updateAppWidget(id, views)
         }
     }
@@ -466,18 +475,17 @@ class ChargeWidget : AppWidgetProvider() {
     }
 
     companion object {
-        private val ROW_IDS      = listOf(R.id.widget_charge_row_1, R.id.widget_charge_row_2, R.id.widget_charge_row_3, R.id.widget_charge_row_4, R.id.widget_charge_row_5)
-        private val WEEK_IDS     = listOf(R.id.widget_charge_week_1, R.id.widget_charge_week_2, R.id.widget_charge_week_3, R.id.widget_charge_week_4, R.id.widget_charge_week_5)
-        private val BAR_DONE_IDS = listOf(R.id.widget_charge_bar_done_1, R.id.widget_charge_bar_done_2, R.id.widget_charge_bar_done_3, R.id.widget_charge_bar_done_4, R.id.widget_charge_bar_done_5)
-        private val BAR_PEND_IDS = listOf(R.id.widget_charge_bar_pending_1, R.id.widget_charge_bar_pending_2, R.id.widget_charge_bar_pending_3, R.id.widget_charge_bar_pending_4, R.id.widget_charge_bar_pending_5)
-        private val COUNT_IDS    = listOf(R.id.widget_charge_count_1, R.id.widget_charge_count_2, R.id.widget_charge_count_3, R.id.widget_charge_count_4, R.id.widget_charge_count_5)
+        private val ROW_IDS   = listOf(R.id.widget_charge_row_1, R.id.widget_charge_row_2, R.id.widget_charge_row_3, R.id.widget_charge_row_4, R.id.widget_charge_row_5)
+        private val WEEK_IDS  = listOf(R.id.widget_charge_week_1, R.id.widget_charge_week_2, R.id.widget_charge_week_3, R.id.widget_charge_week_4, R.id.widget_charge_week_5)
+        private val BAR_IDS   = listOf(R.id.widget_charge_bar_1, R.id.widget_charge_bar_2, R.id.widget_charge_bar_3, R.id.widget_charge_bar_4, R.id.widget_charge_bar_5)
+        private val COUNT_IDS = listOf(R.id.widget_charge_count_1, R.id.widget_charge_count_2, R.id.widget_charge_count_3, R.id.widget_charge_count_4, R.id.widget_charge_count_5)
 
         fun update(ctx: Context, mgr: AppWidgetManager, id: Int) {
             val views   = RemoteViews(ctx.packageName, R.layout.widget_charge)
             val payload = readPayload(ctx)
             val weeks   = payload?.optJSONArray("charge_weeks") ?: JSONArray()
 
-            ROW_IDS.forEach { views.setViewVisibility(it, View.GONE) }
+            for (rowId in ROW_IDS) { views.setViewVisibility(rowId, View.GONE) }
 
             for (i in 0 until minOf(weeks.length(), 5)) {
                 val w       = weeks.getJSONObject(i)
@@ -487,14 +495,14 @@ class ChargeWidget : AppWidgetProvider() {
                 val pending = w.optInt("pending", 0)
                 val pctDone = w.optInt("pct_done", 0)
                 val pctTot  = w.optInt("pct_total", 0)
-                val pctPend = pctTot - (pctTot * pctDone / 100)
-                val weekLabel = if (isCurr) "→ ${w.optString("week")}" else w.optString("week", "")
+                val weekLabel = if (isCurr) "-> ${w.optString("week")}" else w.optString("week", "")
 
                 views.setViewVisibility(ROW_IDS[i], View.VISIBLE)
                 views.setTextViewText(WEEK_IDS[i], weekLabel)
                 views.setTextColor(WEEK_IDS[i], if (isCurr) Color.parseColor("#FFD700") else Color.parseColor("#99FFFFFF"))
-                views.setProgressBar(BAR_DONE_IDS[i], 100, pctTot * pctDone / 100, false)
-                views.setProgressBar(BAR_PEND_IDS[i], 100, pctPend, false)
+                // Barre unique : secondaryProgress = total (rouge fond), progress = rendus (vert)
+                views.setProgressBar(BAR_IDS[i], 100, pctTot * pctDone / 100, false)
+                views.setInt(BAR_IDS[i], "setSecondaryProgress", pctTot)
                 views.setTextViewText(COUNT_IDS[i], "$total")
                 views.setTextColor(COUNT_IDS[i], when {
                     total >= 3 -> Color.parseColor("#FF6B6B")
@@ -516,27 +524,28 @@ class WidgetUpdateReceiver : android.content.BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val mgr = AppWidgetManager.getInstance(context)
         try {
-            arrayOf(
-                NextEventWidget::class.java,
-                AgendaWidget::class.java,
-                DevoirsWidget::class.java,
-                ProgressionWidget::class.java,
-                WeekFixedWidget::class.java,
-                WeekSlidingWidget::class.java,
-                ChargeWidget::class.java
-            ).forEach { cls ->
+            fun updateAll(cls: Class<*>) {
                 val provider = android.content.ComponentName(context, cls)
                 val ids = mgr.getAppWidgetIds(provider)
-                when (cls) {
-                    NextEventWidget::class.java    -> ids.forEach { NextEventWidget.update(context, mgr, it) }
-                    AgendaWidget::class.java       -> ids.forEach { AgendaWidget.update(context, mgr, it) }
-                    DevoirsWidget::class.java      -> ids.forEach { DevoirsWidget.update(context, mgr, it) }
-                    ProgressionWidget::class.java  -> ids.forEach { ProgressionWidget.update(context, mgr, it) }
-                    WeekFixedWidget::class.java    -> ids.forEach { WeekFixedWidget.update(context, mgr, it) }
-                    WeekSlidingWidget::class.java  -> ids.forEach { WeekSlidingWidget.update(context, mgr, it) }
-                    ChargeWidget::class.java       -> ids.forEach { ChargeWidget.update(context, mgr, it) }
+                for (id in ids) {
+                    when (cls) {
+                        NextEventWidget::class.java    -> NextEventWidget.update(context, mgr, id)
+                        AgendaWidget::class.java       -> AgendaWidget.update(context, mgr, id)
+                        DevoirsWidget::class.java      -> DevoirsWidget.update(context, mgr, id)
+                        ProgressionWidget::class.java  -> ProgressionWidget.update(context, mgr, id)
+                        WeekFixedWidget::class.java    -> WeekFixedWidget.update(context, mgr, id)
+                        WeekSlidingWidget::class.java  -> WeekSlidingWidget.update(context, mgr, id)
+                        ChargeWidget::class.java       -> ChargeWidget.update(context, mgr, id)
+                    }
                 }
             }
+            updateAll(NextEventWidget::class.java)
+            updateAll(AgendaWidget::class.java)
+            updateAll(DevoirsWidget::class.java)
+            updateAll(ProgressionWidget::class.java)
+            updateAll(WeekFixedWidget::class.java)
+            updateAll(WeekSlidingWidget::class.java)
+            updateAll(ChargeWidget::class.java)
         } catch (e: Exception) {
             Log.e(TAG, "WidgetUpdateReceiver.onReceive() failed: ${e.message}")
         }

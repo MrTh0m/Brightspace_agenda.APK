@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- widget_week_sliding.xml — Vue 7 jours glissants (aujourd'hui + 6)
-     Même structure que week_fixed mais les labels/dates sont glissants -->
+<!-- Layout commun week_fixed et week_sliding
+     5 blocs jour (header + 3 lignes événement)
+     Jours vides masqués — Kotlin remplit les blocs avec les jours ayant des événements
+     Inspiré de renderGroupWeekList() : dot couleur | heure | titre -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -10,175 +12,266 @@
     android:background="@drawable/widget_background">
 
     <!-- En-tête -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="6dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="7 prochains jours"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF" />
-        <TextView
-            android:id="@+id/widget_sliding_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:textColor="#99FFFFFF" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:layout_marginBottom="3dp">
+        <TextView android:id="@+id/widget_week_title"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:textSize="11sp" android:textStyle="bold"
+            android:textColor="#FFFFFF" android:text="Semaine" />
+        <TextView android:id="@+id/widget_week_label"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="10sp" android:textColor="#88FFFFFF" />
     </LinearLayout>
 
-    <!-- 7 colonnes -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+    <ImageView android:layout_width="match_parent" android:layout_height="1dp"
+        android:background="#33FFFFFF" android:layout_marginBottom="2dp" />
 
-        <!-- Jour 1 -->
-        <LinearLayout android:id="@+id/widget_sl_col_1"
-            android:layout_width="0dp" android:layout_height="match_parent"
-            android:layout_weight="1" android:orientation="vertical"
-            android:gravity="center_horizontal" android:padding="2dp">
-            <TextView android:id="@+id/widget_sl_label_1"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
-            <TextView android:id="@+id/widget_sl_date_1"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
-            <TextView android:id="@+id/widget_sl_count_1"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
-                android:layout_marginTop="4dp" />
-            <TextView android:id="@+id/widget_sl_first_1"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="8sp" android:textColor="#88FFFFFF" />
+    <!-- ── BLOC JOUR 1 ── -->
+    <LinearLayout android:id="@+id/widget_block_1"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:visibility="gone"
+        android:layout_marginBottom="4dp">
+        <!-- Header jour -->
+        <TextView android:id="@+id/widget_day_header_1"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="10sp" android:textStyle="bold" android:textColor="#FFFFFF"
+            android:layout_marginBottom="1dp" />
+        <!-- Événement 1a -->
+        <LinearLayout android:id="@+id/widget_ev_1_1"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical"
+            android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_1_1"
+                android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_1_1"
+                android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_1_1"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
         </LinearLayout>
-
-        <!-- Jour 2 -->
-        <LinearLayout android:id="@+id/widget_sl_col_2"
-            android:layout_width="0dp" android:layout_height="match_parent"
-            android:layout_weight="1" android:orientation="vertical"
-            android:gravity="center_horizontal" android:padding="2dp">
-            <TextView android:id="@+id/widget_sl_label_2"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
-            <TextView android:id="@+id/widget_sl_date_2"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
-            <TextView android:id="@+id/widget_sl_count_2"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
-                android:layout_marginTop="4dp" />
-            <TextView android:id="@+id/widget_sl_first_2"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="8sp" android:textColor="#88FFFFFF" />
+        <!-- Événement 1b -->
+        <LinearLayout android:id="@+id/widget_ev_1_2"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical"
+            android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_1_2"
+                android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_1_2"
+                android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_1_2"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
         </LinearLayout>
-
-        <!-- Jour 3 -->
-        <LinearLayout android:id="@+id/widget_sl_col_3"
-            android:layout_width="0dp" android:layout_height="match_parent"
-            android:layout_weight="1" android:orientation="vertical"
-            android:gravity="center_horizontal" android:padding="2dp">
-            <TextView android:id="@+id/widget_sl_label_3"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
-            <TextView android:id="@+id/widget_sl_date_3"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
-            <TextView android:id="@+id/widget_sl_count_3"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
-                android:layout_marginTop="4dp" />
-            <TextView android:id="@+id/widget_sl_first_3"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="8sp" android:textColor="#88FFFFFF" />
+        <!-- Événement 1c -->
+        <LinearLayout android:id="@+id/widget_ev_1_3"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical"
+            android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_1_3"
+                android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_1_3"
+                android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_1_3"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
         </LinearLayout>
-
-        <!-- Jour 4 -->
-        <LinearLayout android:id="@+id/widget_sl_col_4"
-            android:layout_width="0dp" android:layout_height="match_parent"
-            android:layout_weight="1" android:orientation="vertical"
-            android:gravity="center_horizontal" android:padding="2dp">
-            <TextView android:id="@+id/widget_sl_label_4"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
-            <TextView android:id="@+id/widget_sl_date_4"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
-            <TextView android:id="@+id/widget_sl_count_4"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
-                android:layout_marginTop="4dp" />
-            <TextView android:id="@+id/widget_sl_first_4"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="8sp" android:textColor="#88FFFFFF" />
-        </LinearLayout>
-
-        <!-- Jour 5 -->
-        <LinearLayout android:id="@+id/widget_sl_col_5"
-            android:layout_width="0dp" android:layout_height="match_parent"
-            android:layout_weight="1" android:orientation="vertical"
-            android:gravity="center_horizontal" android:padding="2dp">
-            <TextView android:id="@+id/widget_sl_label_5"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
-            <TextView android:id="@+id/widget_sl_date_5"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
-            <TextView android:id="@+id/widget_sl_count_5"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
-                android:layout_marginTop="4dp" />
-            <TextView android:id="@+id/widget_sl_first_5"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="8sp" android:textColor="#88FFFFFF" />
-        </LinearLayout>
-
-        <!-- Jour 6 -->
-        <LinearLayout android:id="@+id/widget_sl_col_6"
-            android:layout_width="0dp" android:layout_height="match_parent"
-            android:layout_weight="1" android:orientation="vertical"
-            android:gravity="center_horizontal" android:padding="2dp">
-            <TextView android:id="@+id/widget_sl_label_6"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
-            <TextView android:id="@+id/widget_sl_date_6"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
-            <TextView android:id="@+id/widget_sl_count_6"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
-                android:layout_marginTop="4dp" />
-            <TextView android:id="@+id/widget_sl_first_6"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="8sp" android:textColor="#88FFFFFF" />
-        </LinearLayout>
-
-        <!-- Jour 7 -->
-        <LinearLayout android:id="@+id/widget_sl_col_7"
-            android:layout_width="0dp" android:layout_height="match_parent"
-            android:layout_weight="1" android:orientation="vertical"
-            android:gravity="center_horizontal" android:padding="2dp">
-            <TextView android:id="@+id/widget_sl_label_7"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#99FFFFFF" android:textAllCaps="true" />
-            <TextView android:id="@+id/widget_sl_date_7"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="10sp" android:textColor="#FFFFFF" android:textStyle="bold" />
-            <TextView android:id="@+id/widget_sl_count_7"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="11sp" android:textStyle="bold" android:textColor="#6C8EFF"
-                android:layout_marginTop="4dp" />
-            <TextView android:id="@+id/widget_sl_first_7"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:textSize="8sp" android:textColor="#88FFFFFF" />
-        </LinearLayout>
-
     </LinearLayout>
+
+    <!-- ── BLOC JOUR 2 ── -->
+    <LinearLayout android:id="@+id/widget_block_2"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:visibility="gone"
+        android:layout_marginBottom="4dp">
+        <TextView android:id="@+id/widget_day_header_2"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="10sp" android:textStyle="bold" android:textColor="#FFFFFF"
+            android:layout_marginBottom="1dp" />
+        <LinearLayout android:id="@+id/widget_ev_2_1"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_2_1" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_2_1" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_2_1" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_ev_2_2"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_2_2" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_2_2" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_2_2" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_ev_2_3"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_2_3" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_2_3" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_2_3" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ── BLOC JOUR 3 ── -->
+    <LinearLayout android:id="@+id/widget_block_3"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:visibility="gone"
+        android:layout_marginBottom="4dp">
+        <TextView android:id="@+id/widget_day_header_3"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="10sp" android:textStyle="bold" android:textColor="#FFFFFF"
+            android:layout_marginBottom="1dp" />
+        <LinearLayout android:id="@+id/widget_ev_3_1"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_3_1" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_3_1" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_3_1" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_ev_3_2"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_3_2" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_3_2" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_3_2" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_ev_3_3"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_3_3" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_3_3" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_3_3" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ── BLOC JOUR 4 ── -->
+    <LinearLayout android:id="@+id/widget_block_4"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:visibility="gone"
+        android:layout_marginBottom="4dp">
+        <TextView android:id="@+id/widget_day_header_4"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="10sp" android:textStyle="bold" android:textColor="#FFFFFF"
+            android:layout_marginBottom="1dp" />
+        <LinearLayout android:id="@+id/widget_ev_4_1"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_4_1" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_4_1" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_4_1" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_ev_4_2"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_4_2" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_4_2" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_4_2" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_ev_4_3"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_4_3" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_4_3" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_4_3" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ── BLOC JOUR 5 ── -->
+    <LinearLayout android:id="@+id/widget_block_5"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:visibility="gone"
+        android:layout_marginBottom="4dp">
+        <TextView android:id="@+id/widget_day_header_5"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="10sp" android:textStyle="bold" android:textColor="#FFFFFF"
+            android:layout_marginBottom="1dp" />
+        <LinearLayout android:id="@+id/widget_ev_5_1"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_5_1" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_5_1" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_5_1" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_ev_5_2"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_5_2" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_5_2" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_5_2" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_ev_5_3"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_5_3" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_5_3" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_5_3" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Spacer -->
+    <TextView android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:text="" />
+
+    <!-- Vide -->
+    <TextView android:id="@+id/widget_week_empty"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Aucun événement cette semaine"
+        android:textSize="11sp" android:textColor="#66FFFFFF"
+        android:gravity="center" android:visibility="gone" />
 
 </LinearLayout>

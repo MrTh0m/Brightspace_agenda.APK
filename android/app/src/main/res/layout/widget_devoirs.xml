@@ -57,8 +57,9 @@
 
     <!-- Devoir 1 -->
     <LinearLayout android:id="@+id/widget_devoir_row_1"
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1" android:orientation="horizontal"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:orientation="horizontal"
         android:gravity="center_vertical" android:visibility="gone">
         <ImageView android:id="@+id/widget_devoir_dot_1"
             android:layout_width="6dp" android:layout_height="6dp"
@@ -76,8 +77,9 @@
 
     <!-- Devoir 2 -->
     <LinearLayout android:id="@+id/widget_devoir_row_2"
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1" android:orientation="horizontal"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:orientation="horizontal"
         android:gravity="center_vertical" android:visibility="gone">
         <ImageView android:id="@+id/widget_devoir_dot_2"
             android:layout_width="6dp" android:layout_height="6dp"
@@ -95,8 +97,9 @@
 
     <!-- Devoir 3 -->
     <LinearLayout android:id="@+id/widget_devoir_row_3"
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1" android:orientation="horizontal"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:orientation="horizontal"
         android:gravity="center_vertical" android:visibility="gone">
         <ImageView android:id="@+id/widget_devoir_dot_3"
             android:layout_width="6dp" android:layout_height="6dp"
@@ -114,8 +117,9 @@
 
     <!-- Devoir 4 -->
     <LinearLayout android:id="@+id/widget_devoir_row_4"
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1" android:orientation="horizontal"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:orientation="horizontal"
         android:gravity="center_vertical" android:visibility="gone">
         <ImageView android:id="@+id/widget_devoir_dot_4"
             android:layout_width="6dp" android:layout_height="6dp"
@@ -133,8 +137,9 @@
 
     <!-- Devoir 5 -->
     <LinearLayout android:id="@+id/widget_devoir_row_5"
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1" android:orientation="horizontal"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:orientation="horizontal"
         android:gravity="center_vertical" android:visibility="gone">
         <ImageView android:id="@+id/widget_devoir_dot_5"
             android:layout_width="6dp" android:layout_height="6dp"
@@ -161,5 +166,13 @@
         android:textColor="#66FFFFFF"
         android:gravity="center"
         android:visibility="gone" />
+
+    <!-- Spacer : absorbe l'espace restant pour pousser le contenu vers le haut -->
+    <TextView
+        android:id="@+id/widget_devoirs_spacer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="" />
 
 </LinearLayout>
