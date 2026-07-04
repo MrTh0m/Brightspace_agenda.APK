@@ -63,8 +63,9 @@
 
     <!-- Matière 1 -->
     <LinearLayout android:id="@+id/widget_mat_row_1"
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1" android:orientation="vertical"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:orientation="vertical"
         android:gravity="center_vertical" android:visibility="gone">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
             android:orientation="horizontal" android:gravity="center_vertical">
@@ -85,8 +86,9 @@
 
     <!-- Matière 2 -->
     <LinearLayout android:id="@+id/widget_mat_row_2"
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1" android:orientation="vertical"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:orientation="vertical"
         android:gravity="center_vertical" android:visibility="gone">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
             android:orientation="horizontal" android:gravity="center_vertical">
@@ -107,8 +109,9 @@
 
     <!-- Matière 3 -->
     <LinearLayout android:id="@+id/widget_mat_row_3"
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1" android:orientation="vertical"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:orientation="vertical"
         android:gravity="center_vertical" android:visibility="gone">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
             android:orientation="horizontal" android:gravity="center_vertical">
@@ -129,8 +132,9 @@
 
     <!-- Matière 4 -->
     <LinearLayout android:id="@+id/widget_mat_row_4"
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1" android:orientation="vertical"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:orientation="vertical"
         android:gravity="center_vertical" android:visibility="gone">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
             android:orientation="horizontal" android:gravity="center_vertical">
@@ -148,5 +152,9 @@
             android:max="100" android:progress="0"
             android:progressTint="#6C8EFF" android:progressBackgroundTint="#33FFFFFF" />
     </LinearLayout>
+
+    <!-- Spacer -->
+    <TextView android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:text="" />
 
 </LinearLayout>
