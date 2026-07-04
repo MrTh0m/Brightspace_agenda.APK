@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@drawable/widget_background">
+
+    <!-- En-tête -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="À rendre"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/widget_devoirs_pending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FF6B6B" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" · "
+            android:textSize="11sp"
+            android:textColor="#66FFFFFF" />
+
+        <TextView
+            android:id="@+id/widget_devoirs_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="#99FFFFFF" />
+
+    </LinearLayout>
+
+    <!-- Séparateur -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="4dp"
+        android:background="#33FFFFFF" />
+
+    <!-- Devoir 1 -->
+    <LinearLayout android:id="@+id/widget_devoir_row_1"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="horizontal"
+        android:gravity="center_vertical" android:visibility="gone">
+        <ImageView android:id="@+id/widget_devoir_dot_1"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
+        <TextView android:id="@+id/widget_devoir_title_1"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
+            android:maxLines="1" android:ellipsize="end" />
+        <TextView android:id="@+id/widget_devoir_date_1"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginStart="4dp" android:textSize="10sp" android:textColor="#99FFFFFF" />
+    </LinearLayout>
+
+    <!-- Devoir 2 -->
+    <LinearLayout android:id="@+id/widget_devoir_row_2"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="horizontal"
+        android:gravity="center_vertical" android:visibility="gone">
+        <ImageView android:id="@+id/widget_devoir_dot_2"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
+        <TextView android:id="@+id/widget_devoir_title_2"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
+            android:maxLines="1" android:ellipsize="end" />
+        <TextView android:id="@+id/widget_devoir_date_2"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginStart="4dp" android:textSize="10sp" android:textColor="#99FFFFFF" />
+    </LinearLayout>
+
+    <!-- Devoir 3 -->
+    <LinearLayout android:id="@+id/widget_devoir_row_3"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="horizontal"
+        android:gravity="center_vertical" android:visibility="gone">
+        <ImageView android:id="@+id/widget_devoir_dot_3"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
+        <TextView android:id="@+id/widget_devoir_title_3"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
+            android:maxLines="1" android:ellipsize="end" />
+        <TextView android:id="@+id/widget_devoir_date_3"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginStart="4dp" android:textSize="10sp" android:textColor="#99FFFFFF" />
+    </LinearLayout>
+
+    <!-- Devoir 4 -->
+    <LinearLayout android:id="@+id/widget_devoir_row_4"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="horizontal"
+        android:gravity="center_vertical" android:visibility="gone">
+        <ImageView android:id="@+id/widget_devoir_dot_4"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
+        <TextView android:id="@+id/widget_devoir_title_4"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
+            android:maxLines="1" android:ellipsize="end" />
+        <TextView android:id="@+id/widget_devoir_date_4"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginStart="4dp" android:textSize="10sp" android:textColor="#99FFFFFF" />
+    </LinearLayout>
+
+    <!-- Devoir 5 -->
+    <LinearLayout android:id="@+id/widget_devoir_row_5"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="horizontal"
+        android:gravity="center_vertical" android:visibility="gone">
+        <ImageView android:id="@+id/widget_devoir_dot_5"
+            android:layout_width="6dp" android:layout_height="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/widget_dot"
+            android:scaleType="fitXY" />
+        <TextView android:id="@+id/widget_devoir_title_5"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:textSize="11sp" android:textColor="#FFFFFF"
+            android:maxLines="1" android:ellipsize="end" />
+        <TextView android:id="@+id/widget_devoir_date_5"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginStart="4dp" android:textSize="10sp" android:textColor="#99FFFFFF" />
+    </LinearLayout>
+
+    <!-- Vide -->
+    <TextView
+        android:id="@+id/widget_devoirs_empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Tout est rendu !"
+        android:textSize="11sp"
+        android:textColor="#66FFFFFF"
+        android:gravity="center"
+        android:visibility="gone" />
+
+</LinearLayout>

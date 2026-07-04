@@ -18,10 +18,17 @@
             android:launchMode="singleTask"
             android:exported="true">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+		<intent-filter>
+			<action android:name="android.intent.action.MAIN" />
+			<category android:name="android.intent.category.LAUNCHER" />
+		</intent-filter>
+
+		<intent-filter>
+			<action android:name="android.intent.action.VIEW" />
+			<category android:name="android.intent.category.DEFAULT" />
+			<category android:name="android.intent.category.BROWSABLE" />
+			<data android:scheme="@string/custom_url_scheme" />
+		</intent-filter>
 
         </activity>
 
@@ -34,7 +41,108 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
-    </application>
+		
+		<!-- Widget : Prochain événement -->
+		<receiver
+			android:name=".NextEventWidget"
+			android:exported="true"
+			android:label="Prochain événement">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/widget_next_event_info" />
+		</receiver>
+
+		<!-- Widget : Agenda du jour -->
+		<receiver
+			android:name=".AgendaWidget"
+			android:exported="true"
+			android:label="Agenda du jour">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/widget_agenda_info" />
+		</receiver>
+
+		<!-- Widget : Devoirs à rendre -->
+		<receiver
+			android:name=".DevoirsWidget"
+			android:exported="true"
+			android:label="Devoirs à rendre">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/widget_devoirs_info" />
+		</receiver>
+
+		<!-- Widget : Progression -->
+		<receiver
+			android:name=".ProgressionWidget"
+			android:exported="true"
+			android:label="Progression">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/widget_progression_info" />
+		</receiver>
+
+		<!-- Widget : Vue semaine fixe -->
+		<receiver
+			android:name=".WeekFixedWidget"
+			android:exported="true"
+			android:label="Semaine fixe">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/widget_week_fixed_info" />
+		</receiver>
+
+		<!-- Widget : 7 jours glissants -->
+		<receiver
+			android:name=".WeekSlidingWidget"
+			android:exported="true"
+			android:label="7 jours glissants">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/widget_week_sliding_info" />
+		</receiver>
+
+		<!-- Widget : Charge par semaine -->
+		<receiver
+			android:name=".ChargeWidget"
+			android:exported="true"
+			android:label="Charge par semaine">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/widget_charge_info" />
+		</receiver>
+
+		<!-- Receiver pour mise à jour depuis capacitor-widget-bridge -->
+		<receiver
+			android:name=".WidgetUpdateReceiver"
+			android:exported="false">
+			<intent-filter>
+				<action android:name="com.brightspaceagenda.WIDGET_UPDATE" />
+			</intent-filter>
+		</receiver>
+	
+	</application>
 
     <!-- Permissions -->
 
