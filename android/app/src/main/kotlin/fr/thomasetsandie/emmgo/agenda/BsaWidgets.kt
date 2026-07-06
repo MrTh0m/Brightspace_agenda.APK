@@ -99,25 +99,34 @@ class NextEventWidget : AppWidgetProvider() {
             val payload = readPayload(ctx)
             val next    = payload?.optJSONObject("next_event")
 
-            // Tap global → onglet agenda
-            val globalIntent = openAppIntent(ctx, "bsa://tab/agenda")
-            views.setOnClickPendingIntent(R.id.widget_label, globalIntent)
-
             if (next == null) {
                 views.setTextViewText(R.id.widget_time_remaining, "—")
-                views.setTextViewText(R.id.widget_event_title,
-                    if (payload == null) "Ouvre l'app pour charger" else "Aucun événement à venir")
-                views.setTextViewText(R.id.widget_event_meta, "")
+                views.setTextViewText(R.id.widget_type_label,    "")
+                views.setTextViewText(R.id.widget_event_title,   "Ouvre l'app pour charger")
+                views.setTextViewText(R.id.widget_event_meta,    "")
+                views.setTextViewText(R.id.widget_event_detail,  "")
+                views.setOnClickPendingIntent(R.id.widget_label,
+                    openAppIntent(ctx, "bsa://tab/agenda"))
             } else {
-                val inMin    = next.optInt("in_min", 0)
-                val type     = next.optString("type", "")
-                val tapUrl   = next.optString("tap_url", "bsa://tab/agenda")
-                val typeLabel = if (type == "session") "Live session" else "Atelier"
+                val inMin      = next.optInt("in_min", 0)
+                val type       = next.optString("type", "")
+                val typeLabel  = next.optString("type_label", if (type == "session") "Live Session" else "Atelier")
+                val time       = next.optString("time", "")
+                val timeEnd    = next.optString("time_end", "")
+                val code       = next.optString("code", "")
+                val instructor = next.optString("instructor", "")
+                val tapUrl     = next.optString("tap_url", "bsa://tab/agenda")
+                val metaStr    = if (timeEnd.isNotEmpty()) "$time – $timeEnd" else time
+                val detailStr  = listOfNotNull(
+                    code.takeIf { it.isNotEmpty() },
+                    instructor.takeIf { it.isNotEmpty() }
+                ).joinToString(" · ")
 
                 views.setTextViewText(R.id.widget_time_remaining, formatInMin(inMin))
-                views.setTextViewText(R.id.widget_event_title, next.optString("title", "—"))
-                views.setTextViewText(R.id.widget_event_meta,
-                    "$typeLabel · ${next.optString("time")}")
+                views.setTextViewText(R.id.widget_type_label,   typeLabel)
+                views.setTextViewText(R.id.widget_event_title,  next.optString("title", "—"))
+                views.setTextViewText(R.id.widget_event_meta,   metaStr)
+                views.setTextViewText(R.id.widget_event_detail, detailStr)
                 views.setOnClickPendingIntent(R.id.widget_label,
                     openAppIntent(ctx, tapUrl))
             }
@@ -140,9 +149,10 @@ class AgendaWidget : AppWidgetProvider() {
 
     companion object {
         private val ROW_IDS   = listOf(R.id.widget_row_1, R.id.widget_row_2, R.id.widget_row_3, R.id.widget_row_4, R.id.widget_row_5)
+        private val DOT_IDS   = listOf(R.id.widget_row_1_dot, R.id.widget_row_2_dot, R.id.widget_row_3_dot, R.id.widget_row_4_dot, R.id.widget_row_5_dot)
         private val TIME_IDS  = listOf(R.id.widget_row_1_time, R.id.widget_row_2_time, R.id.widget_row_3_time, R.id.widget_row_4_time, R.id.widget_row_5_time)
         private val TITLE_IDS = listOf(R.id.widget_row_1_title, R.id.widget_row_2_title, R.id.widget_row_3_title, R.id.widget_row_4_title, R.id.widget_row_5_title)
-        private val DOT_IDS   = listOf(R.id.widget_row_1_dot, R.id.widget_row_2_dot, R.id.widget_row_3_dot, R.id.widget_row_4_dot, R.id.widget_row_5_dot)
+        private val DETAIL_IDS= listOf(R.id.widget_row_1_detail, R.id.widget_row_2_detail, R.id.widget_row_3_detail, R.id.widget_row_4_detail, R.id.widget_row_5_detail)
 
         fun update(ctx: Context, mgr: AppWidgetManager, id: Int) {
             val views   = RemoteViews(ctx.packageName, R.layout.widget_agenda)
@@ -150,42 +160,54 @@ class AgendaWidget : AppWidgetProvider() {
             val today   = payload?.optJSONArray("today") ?: JSONArray()
             val count   = today.length()
 
-            // Date du jour
+            // Nombre de lignes adaptatif selon la hauteur du widget
+            val opts    = mgr.getAppWidgetOptions(id)
+            val minH    = opts.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 110)
+            val maxRows = when {
+                minH >= 280 -> 5
+                minH >= 210 -> 4
+                minH >= 150 -> 3
+                else        -> 2
+            }
+
             val sdf = SimpleDateFormat("EEEE d MMM", Locale.FRENCH)
             views.setTextViewText(R.id.widget_date,
                 sdf.format(Date()).replaceFirstChar { it.uppercase() })
             views.setTextViewText(R.id.widget_event_count,
                 when {
                     payload == null -> "Ouvre l'app"
-                    count == 0 -> ""
-                    else -> "$count événement${if (count > 1) "s" else ""}"
+                    count == 0     -> ""
+                    else           -> "$count événement${if (count > 1) "s" else ""}"
                 })
 
-            // Masquer toutes les lignes + vide par défaut
             for (rowId in ROW_IDS) { views.setViewVisibility(rowId, View.GONE) }
+            views.setViewVisibility(R.id.widget_empty, if (payload != null && count == 0) View.VISIBLE else View.GONE)
 
-            val showEmpty = payload != null && count == 0
-            views.setViewVisibility(R.id.widget_empty,
-                if (showEmpty) View.VISIBLE else View.GONE)
-
-            // Peupler les lignes
-            for (i in 0 until minOf(count, 5)) {
-                val ev     = today.getJSONObject(i)
-                val type   = ev.optString("type", "session")
-                val tapUrl = ev.optString("tap_url", "bsa://tab/agenda")
+            for (i in 0 until minOf(count, maxRows)) {
+                val ev       = today.getJSONObject(i)
+                val type     = ev.optString("type", "session")
+                val time     = ev.optString("time", "")
+                val timeEnd  = ev.optString("time_end", "")
+                val code     = ev.optString("code", "")
+                val instr    = ev.optString("instructor", "")
+                val tapUrl   = ev.optString("tap_url", "bsa://tab/agenda")
                 val dotColor = if (type == "session") COLOR_BLUE else COLOR_GREEN
+                val timeStr  = if (timeEnd.isNotEmpty()) "$time–$timeEnd" else time
+                val detailParts = listOfNotNull(
+                    ev.optString("type_label", "").takeIf { it.isNotEmpty() },
+                    code.takeIf { it.isNotEmpty() },
+                    instr.takeIf { it.isNotEmpty() }
+                )
 
                 views.setViewVisibility(ROW_IDS[i], View.VISIBLE)
-                views.setTextViewText(TIME_IDS[i], ev.optString("time", ""))
-                views.setTextViewText(TITLE_IDS[i], ev.optString("title", "—"))
                 views.setInt(DOT_IDS[i], "setColorFilter", dotColor)
-                views.setOnClickPendingIntent(ROW_IDS[i],
-                    openAppIntent(ctx, tapUrl))
+                views.setTextViewText(TIME_IDS[i], timeStr)
+                views.setTextViewText(TITLE_IDS[i], ev.optString("title", "—"))
+                views.setTextViewText(DETAIL_IDS[i], detailParts.joinToString(" · "))
+                views.setOnClickPendingIntent(ROW_IDS[i], openAppIntent(ctx, tapUrl))
             }
 
-            views.setOnClickPendingIntent(R.id.widget_date,
-                openAppIntent(ctx, "bsa://tab/agenda"))
-
+            views.setOnClickPendingIntent(R.id.widget_date, openAppIntent(ctx, "bsa://tab/agenda"))
             mgr.updateAppWidget(id, views)
         }
     }
@@ -246,6 +268,17 @@ class DevoirsWidget : AppWidgetProvider() {
                 views.setViewVisibility(ROW_IDS[i], View.VISIBLE)
                 views.setTextViewText(TITLE_IDS[i], d.optString("title", "—"))
                 views.setTextViewText(DATE_IDS[i], formatDays(days))
+                // Afficher matière sous le titre
+                val course = d.optString("course", "")
+                val code   = d.optString("code", "")
+                val courseStr = when {
+                    course.isNotEmpty() -> course
+                    code.isNotEmpty()   -> code
+                    else                -> ""
+                }
+                // On réutilise DATE_IDS pour la date et on affiche la matière dans TITLE si on a de la place
+                // Le layout actuel n'a pas de champ matière — on concatène sous le titre
+                views.setTextViewText(TITLE_IDS[i], if (courseStr.isNotEmpty()) "${d.optString("title", "—")}\n$courseStr" else d.optString("title", "—"))
                 views.setInt(DOT_IDS[i], "setColorFilter", urgencyColor(days))
                 views.setTextColor(DATE_IDS[i], urgencyColor(days))
                 views.setOnClickPendingIntent(ROW_IDS[i],
@@ -401,7 +434,10 @@ private fun updateWeekBlocks(
             }
             views.setViewVisibility(EV_IDS[slot][j], View.VISIBLE)
             views.setInt(DOT_IDS[slot][j], "setColorFilter", color)
-            views.setTextViewText(TIME_IDS[slot][j], ev.optString("time", ""))
+            val evTime    = ev.optString("time", "")
+            val evTimeEnd = ev.optString("time_end", "")
+            val timeStr   = if (evTimeEnd.isNotEmpty()) "$evTime–$evTimeEnd" else evTime
+            views.setTextViewText(TIME_IDS[slot][j], timeStr)
             views.setTextViewText(TITLE_IDS[slot][j], ev.optString("title", "—"))
         }
     }

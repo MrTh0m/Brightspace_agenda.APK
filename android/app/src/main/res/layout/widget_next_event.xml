@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- widget_next_event.xml — Prochain événement (2×1)
+     Affiche : temps restant, titre, heure début–fin, code matière, intervenant, type
+     Spacer en bas pour aligner le contenu vers le haut -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -7,46 +10,71 @@
     android:padding="12dp"
     android:background="@drawable/widget_background">
 
-    <!-- En-tête -->
     <TextView
         android:id="@+id/widget_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Prochain"
         android:textSize="10sp"
-        android:textColor="#99FFFFFF"
-        android:textAllCaps="false" />
+        android:textColor="#88FFFFFF"
+        android:textAllCaps="true"
+        android:letterSpacing="0.05" />
 
     <!-- Temps restant -->
     <TextView
         android:id="@+id/widget_time_remaining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="13sp"
+        android:layout_marginTop="2dp"
+        android:textSize="14sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF" />
 
-    <!-- Titre événement -->
+    <!-- Type (Live Session / Atelier) -->
+    <TextView
+        android:id="@+id/widget_type_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="9sp"
+        android:textColor="#88FFFFFF"
+        android:layout_marginTop="1dp" />
+
+    <!-- Titre -->
     <TextView
         android:id="@+id/widget_event_title"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="4dp"
-        android:textSize="13sp"
-        android:textColor="#FFFFFF"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="#EEEEFF"
         android:maxLines="2"
         android:ellipsize="end" />
 
-    <!-- Heure + type -->
+    <!-- Heure début – fin -->
     <TextView
         android:id="@+id/widget_event_meta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:textSize="10sp"
-        android:textColor="#99FFFFFF"
+        android:textColor="#88FFFFFF"
         android:maxLines="1"
         android:ellipsize="end" />
+
+    <!-- Code matière + intervenant -->
+    <TextView
+        android:id="@+id/widget_event_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:textSize="10sp"
+        android:textColor="#88FFFFFF"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <!-- Spacer -->
+    <TextView android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:text="" />
 
 </LinearLayout>
