@@ -263,6 +263,94 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- ── BLOC JOUR 6 ── -->
+    <LinearLayout android:id="@+id/widget_block_6"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:visibility="gone"
+        android:layout_marginBottom="4dp">
+        <TextView android:id="@+id/widget_day_header_6"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="10sp" android:textStyle="bold" android:textColor="#FFFFFF"
+            android:layout_marginBottom="1dp" />
+        <LinearLayout android:id="@+id/widget_ev_6_1"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_6_1" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_6_1" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_6_1" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_ev_6_2"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_6_2" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_6_2" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_6_2" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_ev_6_3"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_6_3" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_6_3" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_6_3" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ── BLOC JOUR 7 ── -->
+    <LinearLayout android:id="@+id/widget_block_7"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:visibility="gone"
+        android:layout_marginBottom="4dp">
+        <TextView android:id="@+id/widget_day_header_7"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="10sp" android:textStyle="bold" android:textColor="#FFFFFF"
+            android:layout_marginBottom="1dp" />
+        <LinearLayout android:id="@+id/widget_ev_7_1"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_7_1" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_7_1" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_7_1" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_ev_7_2"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_7_2" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_7_2" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_7_2" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_ev_7_3"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
+            <ImageView android:id="@+id/widget_ev_dot_7_3" android:layout_width="5dp" android:layout_height="5dp"
+                android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
+            <TextView android:id="@+id/widget_ev_time_7_3" android:layout_width="32dp" android:layout_height="wrap_content"
+                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_title_7_3" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
+                android:maxLines="1" android:ellipsize="end" />
+        </LinearLayout>
+    </LinearLayout>
+
     <!-- Spacer -->
     <TextView android:layout_width="match_parent" android:layout_height="0dp"
         android:layout_weight="1" android:text="" />

@@ -1,53 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- widget_next_event.xml — Prochain événement (2×1)
-     Affiche : temps restant, titre, heure début–fin, code matière, intervenant, type
-     Spacer en bas pour aligner le contenu vers le haut -->
+<!-- widget_next_event.xml — Prochain événement (3×1, redimensionnable)
+     Inspiré du bandeau "renderNextSessionChip()" de l'app web :
+     icône type | libellé + titre | badge d'urgence, puis bouton "Rejoindre" si lien de réunion.
+     Spacer en bas pour aligner le contenu vers le haut. -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_next_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="12dp"
     android:background="@drawable/widget_background">
 
-    <TextView
-        android:id="@+id/widget_label"
-        android:layout_width="wrap_content"
+    <!-- Ligne 1 : icône type + libellé + badge urgence -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Prochain"
-        android:textSize="10sp"
-        android:textColor="#88FFFFFF"
-        android:textAllCaps="true"
-        android:letterSpacing="0.05" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-    <!-- Temps restant -->
-    <TextView
-        android:id="@+id/widget_time_remaining"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF" />
+        <FrameLayout
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/widget_icon_chip">
+            <ImageView
+                android:id="@+id/widget_type_icon"
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_widget_video" />
+        </FrameLayout>
 
-    <!-- Type (Live Session / Atelier) -->
-    <TextView
-        android:id="@+id/widget_type_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="9sp"
-        android:textColor="#88FFFFFF"
-        android:layout_marginTop="1dp" />
+        <!-- Badge d'urgence en premier : ne doit jamais être rogné. C'est le
+             libellé (texte secondaire) juste après qui s'efface en premier
+             si la largeur manque, grâce à son ellipsize. -->
+        <TextView
+            android:id="@+id/widget_time_remaining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="#1C2744"
+            android:background="@drawable/widget_pill_blue" />
+
+        <TextView
+            android:id="@+id/widget_type_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="9sp"
+            android:textColor="#99FFFFFF"
+            android:textAllCaps="true"
+            android:letterSpacing="0.04"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
 
     <!-- Titre -->
     <TextView
         android:id="@+id/widget_event_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:textSize="13sp"
         android:textStyle="bold"
-        android:textColor="#EEEEFF"
+        android:textColor="#FFFFFF"
         android:maxLines="2"
         android:ellipsize="end" />
 
@@ -58,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:textSize="10sp"
-        android:textColor="#88FFFFFF"
+        android:textColor="#99FFFFFF"
         android:maxLines="1"
         android:ellipsize="end" />
 
@@ -76,5 +101,22 @@
     <!-- Spacer -->
     <TextView android:layout_width="match_parent" android:layout_height="0dp"
         android:layout_weight="1" android:text="" />
+
+    <!-- Bouton Rejoindre — visible seulement si un lien de réunion existe -->
+    <TextView
+        android:id="@+id/widget_join_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="▶  Rejoindre"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:textColor="#1C2744"
+        android:background="@drawable/widget_pill_blue"
+        android:visibility="gone" />
 
 </LinearLayout>
