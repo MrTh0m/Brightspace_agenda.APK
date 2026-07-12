@@ -1,4 +1,4 @@
-package fr.thomasetsandie.emmgo.agenda;
+package io.github.mrth0m.brightspaceagenda;
 
 import com.getcapacitor.BridgeActivity;
 
