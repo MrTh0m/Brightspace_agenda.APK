@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace = "fr.thomasetsandie.emmgo.agenda"
+    namespace = "io.github.mrth0m.brightspaceagenda"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "fr.thomasetsandie.emmgo.agenda"
+        applicationId "io.github.mrth0m.brightspaceagenda"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

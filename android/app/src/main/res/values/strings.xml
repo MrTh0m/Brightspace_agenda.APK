@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Brightspace Agenda</string>
     <string name="title_activity_main">Brightspace Agenda</string>
-    <string name="package_name">fr.thomasetsandie.emmgo.agenda</string>
+    <string name="package_name">io.github.mrth0m.brightspaceagenda</string>
 	<string name="custom_url_scheme">bsa</string>
 	<string name="widget_next_event_desc">Affiche le prochain événement (session ou atelier)</string>
 	<string name="widget_agenda_desc">Programme des événements du jour</string>

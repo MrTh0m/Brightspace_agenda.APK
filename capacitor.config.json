@@ -1,5 +1,5 @@
 {
-  "appId": "fr.thomasetsandie.emmgo.agenda",
+  "appId": "io.github.mrth0m.brightspaceagenda",
   "appName": "Brightspace Agenda",
   "webDir": "www",
   "bundledWebRuntime": false,
