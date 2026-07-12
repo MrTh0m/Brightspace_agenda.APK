@@ -46,8 +46,9 @@
                 android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
             <TextView android:id="@+id/widget_ev_time_1_1"
-                android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_1_1"
                 android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
@@ -62,8 +63,9 @@
                 android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
             <TextView android:id="@+id/widget_ev_time_1_2"
-                android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_1_2"
                 android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
@@ -78,8 +80,9 @@
                 android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
             <TextView android:id="@+id/widget_ev_time_1_3"
-                android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_1_3"
                 android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
@@ -101,8 +104,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_2_1" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_2_1" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_2_1"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_2_1" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -112,8 +117,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_2_2" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_2_2" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_2_2"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_2_2" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -123,8 +130,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_2_3" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_2_3" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_2_3"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_2_3" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -145,8 +154,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_3_1" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_3_1" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_3_1"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_3_1" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -156,8 +167,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_3_2" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_3_2" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_3_2"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_3_2" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -167,8 +180,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_3_3" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_3_3" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_3_3"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_3_3" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -189,8 +204,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_4_1" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_4_1" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_4_1"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_4_1" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -200,8 +217,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_4_2" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_4_2" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_4_2"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_4_2" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -211,8 +230,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_4_3" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_4_3" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_4_3"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_4_3" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -233,8 +254,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_5_1" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_5_1" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_5_1"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_5_1" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -244,8 +267,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_5_2" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_5_2" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_5_2"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_5_2" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -255,8 +280,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_5_3" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_5_3" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_5_3"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_5_3" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -277,8 +304,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_6_1" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_6_1" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_6_1"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_6_1" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -288,8 +317,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_6_2" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_6_2" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_6_2"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_6_2" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -299,8 +330,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_6_3" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_6_3" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_6_3"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_6_3" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -321,8 +354,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_7_1" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_7_1" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_7_1"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_7_1" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -332,8 +367,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_7_2" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_7_2" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_7_2"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_7_2" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
@@ -343,8 +380,10 @@
             android:orientation="horizontal" android:gravity="center_vertical" android:visibility="gone">
             <ImageView android:id="@+id/widget_ev_dot_7_3" android:layout_width="5dp" android:layout_height="5dp"
                 android:layout_marginEnd="5dp" android:src="@drawable/widget_dot" android:scaleType="fitXY" />
-            <TextView android:id="@+id/widget_ev_time_7_3" android:layout_width="32dp" android:layout_height="wrap_content"
-                android:textSize="9sp" android:textColor="#88FFFFFF" />
+            <TextView android:id="@+id/widget_ev_time_7_3"
+                android:layout_width="48dp" android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp" android:textSize="8sp" android:textColor="#88FFFFFF"
+                android:maxLines="1" android:singleLine="true" android:ellipsize="end" />
             <TextView android:id="@+id/widget_ev_title_7_3" android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:textSize="10sp" android:textColor="#EEEEFF"
                 android:maxLines="1" android:ellipsize="end" />
