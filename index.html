@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brightspace Agenda · Politique de confidentialité</title>
+<meta name="description" content="Politique de confidentialité de Brightspace Agenda pour Android">
+<meta name="theme-color" content="#1c1b18">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:#faf9f6; --bg2:#f2f1ed; --bg3:#ffffff;
+  --border:#e2e0d8; --border2:#ccc9be;
+  --text:#1c1b18; --text2:#706e66; --text3:#a09d93;
+  --radius:14px;
+  --shadow:0 1px 4px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);
+  --font:system-ui,-apple-system,"Segoe UI",sans-serif;
+  --c-blue:#1a7fc1; --bg-blue:#e8f3fb;
+}
+@media (prefers-color-scheme:dark) {
+  :root {
+    --bg:#18171a;--bg2:#222128;--bg3:#2a2932;
+    --border:#38363f;--border2:#4a4857;
+    --text:#e8e6e0;--text2:#9c9994;--text3:#666360;
+    --bg-blue:#172233;
+    --shadow:0 1px 4px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.2);
+  }
+}
+
+body {
+  font-family:var(--font); background:var(--bg); color:var(--text);
+  line-height:1.6; font-size:15px;
+}
+.wrap { max-width:720px; margin:0 auto; padding:40px 20px 80px; }
+
+header { display:flex; align-items:center; gap:14px; margin-bottom:8px; }
+.icon-wrap {
+  width:48px; height:48px; border-radius:14px; background:var(--bg-blue);
+  display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;
+}
+h1 { font-size:19px; font-weight:600; }
+.updated { color:var(--text3); font-size:12px; margin:6px 0 32px; }
+
+p { color:var(--text2); margin-bottom:12px; }
+strong { color:var(--text); font-weight:600; }
+
+.card {
+  background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius);
+  padding:22px 24px; margin-bottom:16px; box-shadow:var(--shadow);
+}
+.card h2 {
+  font-size:14px; font-weight:600; margin-bottom:12px;
+  display:flex; align-items:center; gap:8px;
+}
+.card ul { margin:8px 0 4px 20px; color:var(--text2); }
+.card li { margin-bottom:6px; }
+
+a { color:var(--c-blue); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+footer { text-align:center; color:var(--text3); font-size:12px; margin-top:32px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="icon-wrap">📚</div>
+  <h1>Brightspace Agenda</h1>
+</header>
+<p class="updated">Politique de confidentialité · dernière mise à jour : 13 juillet 2026</p>
+
+<p>Brightspace Agenda (« l'application ») est une application Android personnelle d'agenda académique qui affiche les devoirs, les sessions en direct et les notes issus de Brightspace by D2L. Cette page explique quelles données sont traitées et comment.</p>
+
+<div class="card">
+<h2>Mode Local (invité)</h2>
+<p>Dans ce mode, aucune donnée n'est transmise à un serveur. Les devoirs, sessions et préférences sont stockés uniquement dans le stockage local de votre appareil (localStorage / stockage de l'application). Rien n'est envoyé à l'éditeur ni à un tiers.</p>
+</div>
+
+<div class="card">
+<h2>Mode Connecté</h2>
+<p>Ce mode permet de synchroniser vos données entre plusieurs appareils via un serveur personnel auto-hébergé (non un service cloud commercial). Les données suivantes peuvent transiter par ce serveur :</p>
+<ul>
+  <li>le ou les liens de calendrier ICS que vous renseignez (un lien principal, et optionnellement un second) nécessaires pour récupérer votre agenda</li>
+  <li>vos devoirs, sessions, notes et préférences d'affichage</li>
+</ul>
+<p>Ces données sont utilisées uniquement pour faire fonctionner l'application (affichage de l'agenda, des notes et des widgets) et ne sont ni vendues ni partagées avec des tiers à des fins commerciales.</p>
+</div>
+
+<div class="card">
+<h2>Mode Partage</h2>
+<p>Un jeton de partage en lecture seule peut être généré pour consulter un agenda depuis un autre appareil ou pour alimenter les widgets d'écran d'accueil. Ce jeton ne donne accès qu'aux données d'agenda déjà partagées, et peut être révoqué à tout moment.</p>
+</div>
+
+<div class="card">
+<h2>Widgets Android</h2>
+<p>Les widgets d'écran d'accueil affichent des données déjà stockées localement sur l'appareil ; ils ne collectent pas de nouvelles données et ne font transiter aucune donnée par un serveur tiers.</p>
+</div>
+
+<div class="card">
+<h2>Ce que l'application ne fait pas</h2>
+<ul>
+  <li>Pas de publicité ni de SDK publicitaire</li>
+  <li>Pas d'outil d'analyse ou de suivi tiers</li>
+  <li>Pas de revente ni de partage de données à des fins commerciales</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Sécurité</h2>
+<p>Les échanges entre l'application et le serveur auto-hébergé transitent en HTTPS. L'accès au mode Connecté nécessite une authentification propre à votre serveur. Le code source de l'application et du serveur est public et consultable sur GitHub.</p>
+</div>
+
+<div class="card">
+<h2>Vos droits</h2>
+<p>En mode Local, la désinstallation de l'application ou l'effacement du stockage local supprime définitivement vos données. En mode Connecté, vos données sont stockées uniquement sur le serveur auto-hébergé que vous (ou votre administrateur) contrôlez ; nous n'y avons pas accès. La suppression de vos données se fait directement sur ce serveur, ou en s'adressant à la personne qui l'administre.</p>
+</div>
+
+<div class="card">
+<h2>Modifications de cette politique</h2>
+<p>Cette politique peut être mise à jour en cas d'évolution de l'application. La date de dernière mise à jour est indiquée en haut de cette page. L'historique des modifications est consultable via l'historique Git de ce dépôt.</p>
+</div>
+
+<div class="card">
+<h2>Contact</h2>
+<p>Pour toute question concernant cette politique ou vos données : <a href="mailto:mrthom.contact@gmail.com">mrthom.contact@gmail.com</a></p>
+</div>
+
+<footer>Brightspace Agenda est un projet indépendant, non affilié à D2L Corporation ni à Brightspace by D2L.</footer>
+
+</div>
+</body>
+</html>
